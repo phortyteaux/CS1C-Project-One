@@ -1,16 +1,2 @@
-Template for story: persona + need + purpose
-
-1. Persona - I am the manager of a clothing store
-   Need - I want to keep track of men's formal attire by size, color, fit, and quantity
-   Purpose - So that I may appropriately make large quantity sales or rent for formal events like weddings
-2. Persona - I am organizing a party amongst friends
-   Need - I want to assign everyone attending a dish or supply to bring, without any overlapping
-   Purpose - So that I may present the most dietary inclusive meal for everyone. Dairy free, nut free, gluten free, etc.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
+Link to Sample Agile Stories
+https://docs.google.com/document/d/1SL7_1Et1NLYM_ZBFlRk-uBclvmFuUP1O4HntfaXTJHE/edit?usp=sharing
