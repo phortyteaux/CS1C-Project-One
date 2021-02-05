@@ -1,4 +1,4 @@
 2/5 Planning Poker
-  -
-  -
-  -
+  -Completed 7/10 user stories and assigned story points through planning poker
+  -Discussed the potential of swapping the role of Product Owner from Jake to Johnny
+  -Saved a recording of planning poker to share with Prof. Lebowitz
