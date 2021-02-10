@@ -1,1 +1,3 @@
-User Stories: https://docs.google.com/document/d/1SL7_1Et1NLYM_ZBFlRk-uBclvmFuUP1O4HntfaXTJHE/edit
+User Stories:                https://docs.google.com/document/d/1SL7_1Et1NLYM_ZBFlRk-uBclvmFuUP1O4HntfaXTJHE/edit
+
+Team Rules/Coding Standards: https://docs.google.com/document/d/1SJwJZ9_PpKrgdPsKDiP3OHK2-5Y-0RhxmDidODw5iN0/edit
