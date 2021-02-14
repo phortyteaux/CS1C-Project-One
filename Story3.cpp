@@ -11,7 +11,7 @@ int main()
 
     file.open("nfl.csv");
 
-    getline(file, temp);
+    getline(file, temp); //removes line containing column titles
 
     newTeam.read(file);
 

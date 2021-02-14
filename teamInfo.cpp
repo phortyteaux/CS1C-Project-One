@@ -79,7 +79,7 @@ string teamInfo::getDateOpened() const
 // misc functions
 void teamInfo::read(fstream &inFile) 
 {
-	string temp = "";
+	string temp = ""; //used to remove quotes from the .csv
 
 	getline(inFile, teamName, ',');
 	getline(inFile, stadiumName, ',');
@@ -96,6 +96,7 @@ void teamInfo::read(fstream &inFile)
 }
 void teamInfo::print() 
 {
+	//temporary implementation of of print()
 	cout << "Printing: " << endl;
 	cout << teamName << endl;
 	cout << stadiumName << endl;
@@ -107,14 +108,3 @@ void teamInfo::print()
 	cout << typeOfRoof << endl;
 	cout << dateOpened << endl;
 }
-/*
-private:
-	string teamName;
-	string stadiumName;
-	int	   seatingCapacity;
-	string stadiumLocation;
-	string conference;
-	string division;
-	string typeOfSurface;
-	string typeOfRoof;
-	int	   dateOpened;*/
