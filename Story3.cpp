@@ -3,23 +3,59 @@
 
 #include "teamInfo.h"
 
+// function call operator overloads
+// will move these to a file for global definitions later
+struct sortByTeam
+{
+    inline bool operator() (const teamInfo& obj1, const teamInfo& obj2)
+    {
+        return (obj1.getTeamName() < obj2.getTeamName());
+    }
+};
+struct sortByStadium
+{
+    inline bool operator() (const teamInfo& obj1, const teamInfo& obj2)
+    {
+        return (obj1.getStadiumName() < obj2.getStadiumName());
+    }
+};
+
 int main()
 {
     fstream file;
-    teamInfo newTeam;
+    teamInfo newTeam1, newTeam2, newTeam3;
     string temp = "";
 
     file.open("nfl.csv");
 
     getline(file, temp); //removes line containing column titles
-
-    newTeam.read(file);
+    
+    newTeam1.read(file);
+    newTeam2.read(file);
+    newTeam3.read(file);
 
     file.close();
 
-    newTeam.print();
+    vector<teamInfo> teamInfoVec;
+    teamInfoVec.push_back(newTeam1);
+    teamInfoVec.push_back(newTeam2);
+    teamInfoVec.push_back(newTeam3);
+    swap(teamInfoVec[0], teamInfoVec[2]); // data is already organized by team name, so swap unorganizes it
 
-    
+    cout << "Before sorting:" << endl;
+    for (int i = 0; i < 3; i++) 
+    {
+        teamInfoVec[i].print();
+    }
+
+    sort(teamInfoVec.begin(), teamInfoVec.end(), sortByTeam());
+
+    cout << "After sorting:" << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        teamInfoVec[i].print();
+    }
+
     return 0;
 }
 

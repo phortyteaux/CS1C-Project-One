@@ -1,5 +1,6 @@
 #include "teamInfo.h"
 
+
 // setters
 void teamInfo::setTeamName(string n) 
 {
@@ -99,12 +100,20 @@ void teamInfo::print()
 	//temporary implementation of of print()
 	cout << "Printing: " << endl;
 	cout << teamName << endl;
-	cout << stadiumName << endl;
+	/*cout << stadiumName << endl;
 	cout << seatingCapacity << endl;
 	cout << stadiumLocation << endl;
 	cout << conference << endl;
 	cout << division << endl;
 	cout << typeOfSurface << endl;
 	cout << typeOfRoof << endl;
-	cout << dateOpened << endl;
+	cout << dateOpened << endl;*/
+}
+void teamInfo::alphabetize(vector<string>& sortingVector) 
+{
+	sort(sortingVector.begin(), sortingVector.end());
+}
+void teamInfo::addToVector(vector<string>& sortingVector, string dataMember) 
+{
+	sortingVector.push_back(dataMember);
 }

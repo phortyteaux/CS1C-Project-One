@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class teamInfo
@@ -18,6 +20,9 @@ private:
 	string typeOfRoof;
 	string dateOpened;
 public:
+	/*// function call operator overloads
+	struct sortByTeam;
+	struct sortByStadium;*/
 	// setters 
 	void setTeamName(string);
 	void setStadiumName(string);
@@ -42,5 +47,8 @@ public:
 	// misc functions
 	void read(fstream&);
 	void print();
+	void alphabetize(vector<string>&);
+	void addToVector(vector<string>&, string);
 };
+
 
