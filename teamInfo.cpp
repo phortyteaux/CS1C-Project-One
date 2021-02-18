@@ -1,39 +1,97 @@
+/**
+ * @file teamInfo.cpp
+ * @author Max Kwatcher and Johnny Wannamaker
+ * @brief This file contains the implementation of teamInfo methods
+ * @date 2021-02-17
+ */
+
 #include "teamInfo.h"
 
-
-// setters
+/**
+ * @brief A setter for the team name of a team info object.
+ * 
+ * @param n The team name to be stored in the team info object.
+ */
 void teamInfo::setTeamName(string n) 
 {
 	teamName = n;
 }
+
+/**
+ * @brief A setter for the stadium name of a team info object.
+ * 
+ * @param n The name of the home stadium of the team info object.
+ */
 void teamInfo::setStadiumName(string n) 
 {
 	stadiumName = n;
 }
+
+/**
+ * @brief A setter for the seating capacity of a team info object.
+ * 
+ * @param n The number of seats available in a team info object's stadium.
+ */
 void teamInfo::setSeatingCapacity(string n) 
 {
 	seatingCapacity = n;
 }
+
+/**
+ * @brief A setter for the stadium location of a team info object.
+ * 
+ * @param n The location of the stadium.
+ */
 void teamInfo::setStadiumLocation(string n) 
 {
 	stadiumLocation = n;
 }
+
+/**
+ * @brief A setter for the conference of a team info object.
+ * 
+ * @param n The conference that a team competes in (NFC, AFC, etc).
+ */
 void teamInfo::setConference(string n) 
 {
 	conference = n;
 }
+
+/**
+ * @brief A setter for the division of a team info object.
+ * 
+ * @param n The division of a team (NFC West, AFC South, etc).
+ */
 void teamInfo::setDivision(string n) 
 {
 	division = n;
 }
+
+/**
+ * @brief A setter for the type of surface of the stadium of a team info object.
+ * 
+ * @param n The type of surface of the field of the stadium.
+ */
 void teamInfo::setTypeOfSurface(string n) 
 {
 	typeOfSurface = n;
 }
+
+/**
+ * @brief A setter for the type of roof over the stadium of a team info object.
+ * 
+ * @param n The type of roof of the stadium.
+ */
 void teamInfo::setTypeOfRoof(string n) 
 {
 	typeOfRoof = n;
 }
+
+/**
+ * @brief A setter for the 
+ * 
+ * @param n 
+ */
 void teamInfo::setDateOpened(string n) 
 {
 	dateOpened = n;
