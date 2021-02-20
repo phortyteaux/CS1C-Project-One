@@ -2,6 +2,12 @@
   -Completed 7/10 user stories and assigned story points through planning poker
   -Discussed the potential of swapping the role of Product Owner from Jake to Johnny
   -Saved a recording of planning poker to share with Prof. Lebowitz
+
 2/12 Sprint 1 Planning
   -Johnny and Max met to discuss when to code their assigned stories
   -Aileen and Joy had previously discussed when they would be working together
+
+2/19 Sprint 2 Planning
+  -Discussed the stories to be assigned in Sprint 2
+  -Assigned the pairs to complete the Sprint 2 stories
+  
