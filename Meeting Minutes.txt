@@ -11,3 +11,6 @@
   -Discussed the stories to be assigned in Sprint 2
   -Assigned the pairs to complete the Sprint 2 stories
   
+2/26 Sprint 2 check-in
+  -revisited who was working on which stories
+  -worked on assignment 5
