@@ -1,16 +1,10 @@
-/**
- * @file Story3.cpp
- * @author Max Kwatcher and Johnny Wannamaker
- * @brief This file contains the 'main' function. Program execution begins and ends there.
- * @date 2021-02-17
- */
+// Story3.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 
 #include "teamInfo.h"
 
-/**
- * @brief A function call operator overload. Will be moved into a global definition
- * at a later date.
- */
+// function call operator overloads
+// will move these to a file for global definitions later
 struct sortByTeam
 {
     inline bool operator() (const teamInfo& obj1, const teamInfo& obj2)
@@ -18,11 +12,6 @@ struct sortByTeam
         return (obj1.getTeamName() < obj2.getTeamName());
     }
 };
-
-/**
- * @brief A function call operator overload. Will be moved into a global definition
- * at a later date.
- */
 struct sortByStadium
 {
     inline bool operator() (const teamInfo& obj1, const teamInfo& obj2)
@@ -31,22 +20,15 @@ struct sortByStadium
     }
 };
 
-int main()
+/*int main()
 {
-    /**
-     * @brief A file stream object is initialized.
-     */
     fstream file;
     teamInfo newTeam1, newTeam2, newTeam3;
     string temp = "";
 
     file.open("nfl.csv");
 
-    /**
-     * @brief Construct a new getline object that removes the column names from the input file.
-     * 
-     */
-    getline(file, temp); 
+    getline(file, temp); //removes line containing column titles
     
     newTeam1.read(file);
     newTeam2.read(file);
@@ -75,7 +57,7 @@ int main()
     }
 
     return 0;
-}
+}*/
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

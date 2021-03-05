@@ -1,177 +1,119 @@
-/**
- * @file teamInfo.cpp
- * @author Max Kwatcher and Johnny Wannamaker
- * @brief This file contains the implementation of teamInfo methods
- * @date 2021-02-17
- */
-
 #include "teamInfo.h"
 
-/**
- * @brief A setter for the team name of a team info object.
- * 
- * @param n The team name to be stored in the team info object.
- */
-void teamInfo::setTeamName(string n) 
-{
-	teamName = n;
-}
 
-/**
- * @brief A setter for the stadium name of a team info object.
- * 
- * @param n The name of the home stadium of the team info object.
- */
-void teamInfo::setStadiumName(string n) 
+// setters
+void teamInfo::setTeamName(string n)
 {
-	stadiumName = n;
+    teamName = n;
 }
-
-/**
- * @brief A setter for the seating capacity of a team info object.
- * 
- * @param n The number of seats available in a team info object's stadium.
- */
-void teamInfo::setSeatingCapacity(string n) 
+void teamInfo::setStadiumName(string n)
 {
-	seatingCapacity = n;
+    stadiumName = n;
 }
-
-/**
- * @brief A setter for the stadium location of a team info object.
- * 
- * @param n The location of the stadium.
- */
-void teamInfo::setStadiumLocation(string n) 
+void teamInfo::setSeatingCapacity(string n)
 {
-	stadiumLocation = n;
+    seatingCapacity = n;
 }
-
-/**
- * @brief A setter for the conference of a team info object.
- * 
- * @param n The conference that a team competes in (NFC, AFC, etc).
- */
-void teamInfo::setConference(string n) 
+void teamInfo::setStadiumLocation(string n)
 {
-	conference = n;
+    stadiumLocation = n;
 }
-
-/**
- * @brief A setter for the division of a team info object.
- * 
- * @param n The division of a team (NFC West, AFC South, etc).
- */
-void teamInfo::setDivision(string n) 
+void teamInfo::setConference(string n)
 {
-	division = n;
+    conference = n;
 }
-
-/**
- * @brief A setter for the type of surface of the stadium of a team info object.
- * 
- * @param n The type of surface of the field of the stadium.
- */
-void teamInfo::setTypeOfSurface(string n) 
+void teamInfo::setDivision(string n)
 {
-	typeOfSurface = n;
+    division = n;
 }
-
-/**
- * @brief A setter for the type of roof over the stadium of a team info object.
- * 
- * @param n The type of roof of the stadium.
- */
-void teamInfo::setTypeOfRoof(string n) 
+void teamInfo::setTypeOfSurface(string n)
 {
-	typeOfRoof = n;
+    typeOfSurface = n;
 }
-
-/**
- * @brief A setter for the 
- * 
- * @param n 
- */
-void teamInfo::setDateOpened(string n) 
+void teamInfo::setTypeOfRoof(string n)
 {
-	dateOpened = n;
+    typeOfRoof = n;
+}
+void teamInfo::setDateOpened(string n)
+{
+    dateOpened = n;
 }
 
 // getters
-string teamInfo::getTeamName() const 
+string teamInfo::getTeamName() const
 {
-	return teamName;
+    return teamName;
 }
-string teamInfo::getStadiumName() const 
+string teamInfo::getStadiumName() const
 {
-	return stadiumName;
+    return stadiumName;
 }
-string teamInfo::getSeatingCapacity() const 
+string teamInfo::getSeatingCapacity() const
 {
-	return seatingCapacity;
+    return seatingCapacity;
 }
-string teamInfo::getStadiumLocation() const 
+string teamInfo::getStadiumLocation() const
 {
-	return stadiumLocation;
+    return stadiumLocation;
 }
-string teamInfo::getConference() const 
+string teamInfo::getConference() const
 {
-	return conference;
+    return conference;
 }
-string teamInfo::getDivision() const 
+string teamInfo::getDivision() const
 {
-	return division;
+    return division;
 }
-string teamInfo::getTypeOfSurface() const 
+string teamInfo::getTypeOfSurface() const
 {
-	return typeOfSurface;
+    return typeOfSurface;
 }
-string teamInfo::getTypeOfRoof() const 
+string teamInfo::getTypeOfRoof() const
 {
-	return typeOfRoof;
+    return typeOfRoof;
 }
-string teamInfo::getDateOpened() const 
+string teamInfo::getDateOpened() const
 {
-	return dateOpened;
+    return dateOpened;
 }
 
 // misc functions
-void teamInfo::read(fstream &inFile) 
+void teamInfo::read(fstream &inFile)
 {
-	string temp = ""; //used to remove quotes from the .csv
+    string temp = ""; //used to remove quotes from the .csv
 
-	getline(inFile, teamName, ',');
-	getline(inFile, stadiumName, ',');
-	getline(inFile, temp, '"');
-	getline(inFile, seatingCapacity, '"');
-	getline(inFile, temp, '"');
-	getline(inFile, stadiumLocation, '"');
-	getline(inFile, temp, ',');
-	getline(inFile, conference, ',');
-	getline(inFile, division, ',');
-	getline(inFile, typeOfSurface, ',');
-	getline(inFile, typeOfRoof, ',');
-	getline(inFile, dateOpened);
+    getline(inFile, teamName, ',');
+    getline(inFile, stadiumName, ',');
+    getline(inFile, temp, '"');
+    getline(inFile, seatingCapacity, '"');
+    getline(inFile, temp, '"');
+    getline(inFile, stadiumLocation, '"');
+    getline(inFile, temp, ',');
+    getline(inFile, conference, ',');
+    getline(inFile, division, ',');
+    getline(inFile, typeOfSurface, ',');
+    getline(inFile, typeOfRoof, ',');
+    getline(inFile, dateOpened);
 }
-void teamInfo::print() 
+void teamInfo::print()
 {
-	//temporary implementation of of print()
-	cout << "Printing: " << endl;
-	cout << teamName << endl;
-	/*cout << stadiumName << endl;
-	cout << seatingCapacity << endl;
-	cout << stadiumLocation << endl;
-	cout << conference << endl;
-	cout << division << endl;
-	cout << typeOfSurface << endl;
-	cout << typeOfRoof << endl;
-	cout << dateOpened << endl;*/
+    //temporary implementation of of print()
+    cout << "Printing: " << endl;
+    cout << teamName << endl;
+    /*cout << stadiumName << endl;
+    cout << seatingCapacity << endl;
+    cout << stadiumLocation << endl;
+    cout << conference << endl;
+    cout << division << endl;
+    cout << typeOfSurface << endl;
+    cout << typeOfRoof << endl;
+    cout << dateOpened << endl;*/
 }
-void teamInfo::alphabetize(vector<string>& sortingVector) 
+void teamInfo::alphabetize(vector<string>& sortingVector)
 {
-	sort(sortingVector.begin(), sortingVector.end());
+    sort(sortingVector.begin(), sortingVector.end());
 }
-void teamInfo::addToVector(vector<string>& sortingVector, string dataMember) 
+void teamInfo::addToVector(vector<string>& sortingVector, string dataMember)
 {
-	sortingVector.push_back(dataMember);
+    sortingVector.push_back(dataMember);
 }
