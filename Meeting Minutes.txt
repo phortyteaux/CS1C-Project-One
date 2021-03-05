@@ -14,3 +14,8 @@
 2/26 Sprint 2 check-in
   -revisited who was working on which stories
   -worked on assignment 5
+
+3/5 Sprint 3 Planning
+  -assigned stories 9 & 10 to Johnny & Max
+  -assigned integration of calculating total seating capacity to Joy & Aileen
+  -planned to finalize doxygen comments after finishing coding (ideally by 3/10)
