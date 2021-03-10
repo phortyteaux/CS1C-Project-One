@@ -1,11 +1,7 @@
-/**
- * @file Team.h
- * @class Team
- * @brief File holds the definition of the Team class
- * @class Holds all of the information associated with a single NFL team
- * @author Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
- * @date 2021-02-17
- * 
+/** 
+ * @file Team.h holds the definition of the Team class
+ * @class Team Holds all of the information associated with a single NFL team
+ * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
 #pragma once
@@ -17,31 +13,31 @@ using namespace std;
 class Team
 {
 private:
-	/// @param name Holds the name of the Team
+	/// @param name Holds the name of the Team.
 	string name;
 
-	/// @param name Holds the name of a Stadium
+	/// @param name Holds the name of a Stadium.
 	string stadiumName;
 
-	/// @param seatingCapacity Holds the maximum seating of a Stadium
+	/// @param seatingCapacity Holds the maximum seating of a Stadium.
 	string seatingCapacity;
 
-	/// @param location Holds the location of a Stadium
+	/// @param location Holds the location of a Stadium.
 	string location;
 
-	/// @param conference Holds the conference that the Team competes in
+	/// @param conference Holds the conference that the Team competes in.
 	string conference;
 
-	/// @param division Holds the regional division of the Team
+	/// @param division Holds the regional division of the Team.
 	string division;
 
-	/// @param surfaceType Holds the material used for the turf of a Stadium
+	/// @param surfaceType Holds the material used for the turf of a Stadium.
 	string surfaceType;
 
-	/// @param roofType Holds the type of roof of a Stadium
+	/// @param roofType Holds the type of roof of a Stadium.
 	string roofType;
 
-	/// @param dateOpened Holds the date that a Staium was opened
+	/// @param dateOpened Holds the date that a Staium was opened.
 	string dateOpened;
 
 public:
