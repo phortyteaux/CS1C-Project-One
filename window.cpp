@@ -133,8 +133,8 @@ Window::Window()
     proxyLayout->addWidget(proxyView, 0, 0, 1, 3);
     proxyLayout->addWidget(filterPatternLabel, 1, 0); // from me
     proxyLayout->addWidget(filterPatternLineEdit, 1, 1, 1, 2);
-    proxyLayout->addWidget(filterSyntaxLabel, 2, 0);
-    proxyLayout->addWidget(filterSyntaxComboBox, 2, 1, 1, 2);
+    //proxyLayout->addWidget(filterSyntaxLabel, 2, 0);
+    //proxyLayout->addWidget(filterSyntaxComboBox, 2, 1, 1, 2);
     proxyLayout->addWidget(filterColumnLabel, 9, 0);
     proxyLayout->addWidget(filterColumnComboBox, 9, 1, 1, 2);
     //proxyLayout->addWidget(filterCaseSensitivityCheckBox, 4, 0, 1, 2);
