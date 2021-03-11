@@ -73,7 +73,7 @@ Window::Window()
     sourceView = new QTreeView;
     sourceView->setRootIsDecorated(false);
     sourceView->setAlternatingRowColors(true);
-
+    sourceView->setSortingEnabled(true);
 
     proxyView = new QTreeView;
     proxyView->setRootIsDecorated(false);
@@ -101,6 +101,11 @@ Window::Window()
     filterColumnComboBox->addItem(tr("Stadium Name"));
     filterColumnComboBox->addItem(tr("Seating Capacity"));
     filterColumnComboBox->addItem(tr("Stadium Location"));
+    filterColumnComboBox->addItem(tr("Conference"));
+    filterColumnComboBox->addItem(tr("Division"));
+    filterColumnComboBox->addItem(tr("Surface Type"));
+    filterColumnComboBox->addItem(tr("Stadium Roof Type"));
+    filterColumnComboBox->addItem(tr("Date Opened"));
     //filterColumnComboBox->addItem(tr("Date"));
     filterColumnLabel = new QLabel(tr("Filter &column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
@@ -117,27 +122,28 @@ Window::Window()
             this, &Window::sortChanged);
 
     sourceGroupBox = new QGroupBox(tr("Original Model"));
-    proxyGroupBox = new QGroupBox(tr("Subset Model")); // Sorted/Filtered Model
+    proxyGroupBox = new QGroupBox(tr("Teams in the League")); // Sorted/Filtered Model
 
     QHBoxLayout *sourceLayout = new QHBoxLayout;
-    sourceLayout->addWidget(sourceView);
+    //sourceLayout->addWidget(sourceView);
     sourceGroupBox->setLayout(sourceLayout);
 
+    // had everything but the proxyView/prpoxyGroupBox commented out
     QGridLayout *proxyLayout = new QGridLayout;
     proxyLayout->addWidget(proxyView, 0, 0, 1, 3);
-    //proxyLayout->addWidget(filterPatternLabel, 1, 0);
-    //proxyLayout->addWidget(filterPatternLineEdit, 1, 1, 1, 2);
-    //proxyLayout->addWidget(filterSyntaxLabel, 2, 0);
-    //proxyLayout->addWidget(filterSyntaxComboBox, 2, 1, 1, 2);
-    proxyLayout->addWidget(filterColumnLabel, 4, 0);
-    proxyLayout->addWidget(filterColumnComboBox, 4, 1, 1, 1, Qt::AlignRight);
+    proxyLayout->addWidget(filterPatternLabel, 1, 0); // from me
+    proxyLayout->addWidget(filterPatternLineEdit, 1, 1, 1, 2);
+    proxyLayout->addWidget(filterSyntaxLabel, 2, 0);
+    proxyLayout->addWidget(filterSyntaxComboBox, 2, 1, 1, 2);
+    proxyLayout->addWidget(filterColumnLabel, 9, 0);
+    proxyLayout->addWidget(filterColumnComboBox, 9, 1, 1, 2);
     //proxyLayout->addWidget(filterCaseSensitivityCheckBox, 4, 0, 1, 2);
-    //proxyLayout->addWidget(sortCaseSensitivityCheckBox, 4, 2);
+    //proxyLayout->addWidget(sortCaseSensitivityCheckBox, 4, 2); // to me
     proxyGroupBox->setLayout(proxyLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    mainLayout->addWidget(sourceGroupBox);
+    //mainLayout->addWidget(sourceGroupBox);
     mainLayout->addWidget(proxyGroupBox);
 
     setLayout(mainLayout);
@@ -145,10 +151,17 @@ Window::Window()
     setWindowTitle(tr("NFL Information Pamphlet"));
     resize(500, 450);
 
-    proxyView->sortByColumn(1, Qt::AscendingOrder);
-    filterColumnComboBox->setCurrentIndex(1);
+    proxyView->sortByColumn(0, Qt::AscendingOrder);
+    filterColumnComboBox->setCurrentIndex(5);
+    filterSyntaxComboBox->setCurrentIndex(2);
 
-    //filterPatternLineEdit->setText("Andy|Grace");
+    //try implementing this in a function outside of constructor?
+    /*QString searchPattern = "AFC";
+    proxyModel->setFilterFixedString(searchPattern);
+    proxyModel->setFilterKeyColumn(5);*/
+
+    //may need to re-comment this out
+    filterPatternLineEdit->setText("");
     filterCaseSensitivityCheckBox->setChecked(false); //both were true
     sortCaseSensitivityCheckBox->setChecked(false);
 }
@@ -158,14 +171,9 @@ void Window::setSourceModel(QAbstractItemModel *model, QAbstractItemModel *secon
     proxyModel->setSourceModel(model);
     sourceView->setModel(model);
     //subsetModel->setSourceModel(secondModel);
-    proxyView->setModel(secondModel);
+    //proxyView->setModel(secondModel);
 }
 
-/*void Window::setProxyView(QAbstractItemModel *model) //, QAbstractItemModel *secondModel
-{
-    proxyModel->setSourceModel(model);
-    proxyView->setModel(model);
-}*/
 
 void Window::filterRegularExpressionChanged()
 {
