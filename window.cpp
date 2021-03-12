@@ -49,8 +49,13 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
+#include <QVector>
+#include <QtAlgorithms>
+#include <iostream>
+#include <string>
 #include "window.h"
+
+const int NUM_COLUMNS = 9;
 
 static inline QColor textColor(const QPalette &palette)
 {
@@ -80,6 +85,7 @@ Window::Window()
     proxyView->setAlternatingRowColors(true);
     proxyView->setModel(proxyModel);
     proxyView->setSortingEnabled(true);
+    proxyView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     sortCaseSensitivityCheckBox = new QCheckBox(tr("Case sensitive sorting"));
     filterCaseSensitivityCheckBox = new QCheckBox(tr("Case sensitive filter"));
@@ -110,6 +116,8 @@ Window::Window()
     filterColumnLabel = new QLabel(tr("Filter &column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
 
+    stadiumCapacityLabel = new QLabel(tr("total capacity"));
+
     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &Window::filterRegularExpressionChanged);
     connect(filterSyntaxComboBox, &QComboBox::currentIndexChanged,
@@ -135,8 +143,9 @@ Window::Window()
     proxyLayout->addWidget(filterPatternLineEdit, 1, 1, 1, 2);
     //proxyLayout->addWidget(filterSyntaxLabel, 2, 0);
     //proxyLayout->addWidget(filterSyntaxComboBox, 2, 1, 1, 2);
-    proxyLayout->addWidget(filterColumnLabel, 9, 0);
-    proxyLayout->addWidget(filterColumnComboBox, 9, 1, 1, 2);
+    proxyLayout->addWidget(filterColumnLabel, 2, 0);
+    proxyLayout->addWidget(filterColumnComboBox, 2, 1, 1, 2);
+    proxyLayout->addWidget(stadiumCapacityLabel, 3, 0);
     //proxyLayout->addWidget(filterCaseSensitivityCheckBox, 4, 0, 1, 2);
     //proxyLayout->addWidget(sortCaseSensitivityCheckBox, 4, 2); // to me
     proxyGroupBox->setLayout(proxyLayout);
@@ -155,23 +164,20 @@ Window::Window()
     filterColumnComboBox->setCurrentIndex(5);
     filterSyntaxComboBox->setCurrentIndex(2);
 
-    //try implementing this in a function outside of constructor?
-    /*QString searchPattern = "AFC";
-    proxyModel->setFilterFixedString(searchPattern);
-    proxyModel->setFilterKeyColumn(5);*/
-
     //may need to re-comment this out
     filterPatternLineEdit->setText("");
     filterCaseSensitivityCheckBox->setChecked(false); //both were true
     sortCaseSensitivityCheckBox->setChecked(false);
 }
 
-void Window::setSourceModel(QAbstractItemModel *model, QAbstractItemModel *secondModel) /**/
+void Window::setSourceModel(QAbstractItemModel *model) /**/
 {
     proxyModel->setSourceModel(model);
     sourceView->setModel(model);
-    //subsetModel->setSourceModel(secondModel);
-    //proxyView->setModel(secondModel);
+    for(int i = 0; i < NUM_COLUMNS; i++)
+    {
+        proxyView->resizeColumnToContents(i);
+    }
 }
 
 
@@ -217,4 +223,26 @@ void Window::sortChanged()
     proxyModel->setSortCaseSensitivity(
             sortCaseSensitivityCheckBox->isChecked() ? Qt::CaseSensitive
                                                      : Qt::CaseInsensitive);
+}
+
+// currently untested; fingers crossed // need to add button & connect with this slot
+void Window::calculateCapacity()
+{
+    const int STADIUM_NAMES = 1;       // column with stadium names
+    const int SEATING_CAPACITY = 2;    // column with seating capacity
+    QVector<QVariant> countedStadiums; //might need to specify some type of string
+    int result = 0;
+    for(int row = 0; row < proxyModel->rowCount(); row++)
+    {
+        if(std::count(countedStadiums.begin(), countedStadiums.end(), proxyModel->data(proxyModel->index(row, STADIUM_NAMES))))
+        {
+            std::cout << "already counted" << std::endl;
+        }
+        else
+        {
+            countedStadiums.push_back(proxyModel->data(proxyModel->index(row, STADIUM_NAMES)));
+            result += proxyModel->data(proxyModel->index(row, SEATING_CAPACITY)).toInt();
+        }
+    }
+    stadiumCapacityLabel->setText(QString::number(result));
 }

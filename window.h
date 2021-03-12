@@ -72,13 +72,14 @@ class Window : public QWidget
 public:
     Window();
 
-    void setSourceModel(QAbstractItemModel *model, QAbstractItemModel *secondModel); /**/
+    void setSourceModel(QAbstractItemModel *model); /**/
     //void setProxyView(QAbstractItemModel *model);
 
 private slots:
     void filterRegularExpressionChanged();
     void filterColumnChanged();
     void sortChanged();
+    void calculateCapacity();
 
 private:
     QSortFilterProxyModel *proxyModel;
@@ -92,6 +93,7 @@ private:
     QLabel *filterPatternLabel;
     QLabel *filterSyntaxLabel;
     QLabel *filterColumnLabel;
+    QLabel *stadiumCapacityLabel;
     QLineEdit *filterPatternLineEdit;
     enum Syntax {
         RegularExpression,

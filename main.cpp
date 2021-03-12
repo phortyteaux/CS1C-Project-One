@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
     inFile.close();
     AFCInfoVec = createDataSubset(mainInfoVec,"AFC");
     //cout << "size of AFCInfoVec: " << AFCInfoVec.size() << endl;
-    window.setSourceModel(createTeamModel(&window, mainInfoVec), createTeamModel(&window, AFCInfoVec)/**/);
+    window.setSourceModel(createTeamModel(&window, mainInfoVec)/**/); //AFCInfoVec
     window.show();
     return app.exec();
 }
