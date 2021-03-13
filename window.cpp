@@ -239,7 +239,8 @@ void Window::calculateCapacity()
     int result = 0;
     for(int row = 0; row < proxyModel->rowCount(); row++)
     {
-        if(std::count(countedStadiums.begin(), countedStadiums.end(), proxyModel->data(proxyModel->index(row, STADIUM_NAMES))))
+        if(std::count(countedStadiums.begin(), countedStadiums.end(),
+                      proxyModel->data(proxyModel->index(row, STADIUM_NAMES))))
         {
             QString temp;
             temp = proxyModel->data(proxyModel->index(row, STADIUM_NAMES)).toString();

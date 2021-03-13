@@ -1,6 +1,6 @@
 #include "extra_functions.h"
 
-QAbstractItemModel *createTeamModel(QObject *parent, vector<teamInfo> &teamInfoVec)
+QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
 {
     // first two args define number of headers/columns
     QStandardItemModel *model = new QStandardItemModel(0, 9, parent);
@@ -16,17 +16,17 @@ QAbstractItemModel *createTeamModel(QObject *parent, vector<teamInfo> &teamInfoV
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Stadium Roof Type"));
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("Date Opened"));
 
-    for(int i = 0; i < teamInfoVec.size(); i++)
+    for(int i = 0; i < teamVec.size(); i++)
     {
-        QString qTeamName = QString::fromStdString(teamInfoVec[i].getTeamName());
-        QString qStadiumName = QString::fromStdString(teamInfoVec[i].getStadiumName());
-        QString qSeatingCapacity = QString::fromStdString(teamInfoVec[i].getSeatingCapacity());
-        QString qLocation = QString::fromStdString(teamInfoVec[i].getStadiumLocation());
-        QString qConference = QString::fromStdString(teamInfoVec[i].getConference());
-        QString qDivision = QString::fromStdString(teamInfoVec[i].getDivision());
-        QString qSurfaceType = QString::fromStdString(teamInfoVec[i].getTypeOfSurface());
-        QString qStadiumRoofType = QString::fromStdString(teamInfoVec[i].getTypeOfRoof());
-        QString qDateOpened = QString::fromStdString(teamInfoVec[i].getDateOpened());
+        QString qTeamName = QString::fromStdString(teamVec[i].getTeamName());
+        QString qStadiumName = QString::fromStdString(teamVec[i].getStadiumName());
+        QString qSeatingCapacity = QString::fromStdString(teamVec[i].getSeatingCapacity());
+        QString qLocation = QString::fromStdString(teamVec[i].getStadiumLocation());
+        QString qConference = QString::fromStdString(teamVec[i].getConference());
+        QString qDivision = QString::fromStdString(teamVec[i].getDivision());
+        QString qSurfaceType = QString::fromStdString(teamVec[i].getTypeOfSurface());
+        QString qStadiumRoofType = QString::fromStdString(teamVec[i].getTypeOfRoof());
+        QString qDateOpened = QString::fromStdString(teamVec[i].getDateOpened());
         addTeam(model, qTeamName, qStadiumName, qSeatingCapacity, qLocation,
                 qConference, qDivision, qSurfaceType, qStadiumRoofType, qDateOpened);
     }

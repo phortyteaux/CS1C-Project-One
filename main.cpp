@@ -49,17 +49,17 @@
 ****************************************************************************/
 
 #include "window.h"
-#include "teamInfo.h"
+#include "team.h"
 #include "extra_functions.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     Window window;
-    vector<teamInfo> mainInfoVec; //source document contains 33 teams by default
+    vector<team> mainInfoVec; //source document contains 33 teams by default
     fstream inFile;
     inFile.open("C:/Qt/Examples/Qt-6.0.0/widgets/itemviews/basicsortfiltermodel/nfl.csv");
-    teamInfo tempElement;
+    team tempElement;
     while(!inFile.eof())
     {
         tempElement.read(inFile);
