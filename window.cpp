@@ -116,10 +116,11 @@ Window::Window()
     filterColumnLabel = new QLabel(tr("Filter &column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
 
-    stadiumCapacityLabel = new QLabel(tr("total capacity"));
+    stadiumCapacityLabel = new QLabel(tr("Total capacity:"));
+    calculatedCapacityLabel = new QLabel(tr(""));
 
     calculateTotalButton = new QPushButton();
-    calculateTotalButton->setText("Calculate Total");
+    calculateTotalButton->setText("Calculate total");
 
     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &Window::filterRegularExpressionChanged);
@@ -151,9 +152,10 @@ Window::Window()
     proxyLayout->addWidget(filterColumnLabel, 2, 0);
     proxyLayout->addWidget(filterColumnComboBox, 2, 1, 1, 2);
     proxyLayout->addWidget(stadiumCapacityLabel, 3, 0);
+    proxyLayout->addWidget(calculatedCapacityLabel, 3, 1);
     //proxyLayout->addWidget(filterCaseSensitivityCheckBox, 4, 0, 1, 2);
     //proxyLayout->addWidget(sortCaseSensitivityCheckBox, 4, 2); // to me
-    proxyLayout->addWidget(calculateTotalButton, 3, 1);
+    proxyLayout->addWidget(calculateTotalButton, 3, 2);
     proxyGroupBox->setLayout(proxyLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -257,9 +259,9 @@ void Window::calculateCapacity()
             tempString.erase(std::remove(tempString.begin(), tempString.end(), ','), tempString.end());
             tempInt = stoi(tempString);
             result += tempInt;
-            std::cout << "tempInt: " << tempInt/*tempString*/ << ", ";
+            std::cout << "tempInt: " << tempInt << ", ";
             std::cout << "result: " << result << std::endl;
         }
     }
-    stadiumCapacityLabel->setText(QString::number(result));
+    calculatedCapacityLabel->setText(QString::number(result));
 }

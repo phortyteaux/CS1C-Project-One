@@ -95,6 +95,7 @@ private:
     QLabel *filterSyntaxLabel;
     QLabel *filterColumnLabel;
     QLabel *stadiumCapacityLabel;
+    QLabel *calculatedCapacityLabel;
     QLineEdit *filterPatternLineEdit;
     QPushButton *calculateTotalButton;
     enum Syntax {

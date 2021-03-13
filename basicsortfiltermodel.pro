@@ -3,10 +3,12 @@ requires(qtConfig(combobox))
 
 HEADERS     = window.h \
     extra_functions.h \
-    teamInfo.h
+    team.h
 SOURCES     = main.cpp \
+              addTeam.cpp \
               createDataSubset.cpp \
-              teamInfo.cpp \
+              createTeamModel.cpp \
+              team.cpp \
               window.cpp
 
 # install
@@ -18,3 +20,4 @@ DISTFILES += \
 
 FORMS += \
     mainwindow.ui
+

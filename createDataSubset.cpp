@@ -1,8 +1,9 @@
 #include "extra_functions.h"
+// this is currently un-used
 
-vector<teamInfo> createDataSubset(vector<teamInfo> fullSetVec, string searchTerm)
+vector<team> createDataSubset(vector<team> fullSetVec, string searchTerm)
 {
-    vector<teamInfo> subsetVec;
+    vector<team> subsetVec;
     int result;
     for (int i = 0; i < fullSetVec.size(); i++)
     {

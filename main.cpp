@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
     Window window;
     vector<team> mainInfoVec; //source document contains 33 teams by default
     fstream inFile;
+    // make sure the filepath makes sense
     inFile.open("C:/Qt/Examples/Qt-6.0.0/widgets/itemviews/basicsortfiltermodel/nfl.csv");
     team tempElement;
     while(!inFile.eof())
