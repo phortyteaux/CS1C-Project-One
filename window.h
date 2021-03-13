@@ -63,6 +63,7 @@ class QLabel;
 class QLineEdit;
 class QSortFilterProxyModel;
 class QTreeView;
+class QPushButton;
 QT_END_NAMESPACE
 
 class Window : public QWidget
@@ -95,6 +96,7 @@ private:
     QLabel *filterColumnLabel;
     QLabel *stadiumCapacityLabel;
     QLineEdit *filterPatternLineEdit;
+    QPushButton *calculateTotalButton;
     enum Syntax {
         RegularExpression,
         Wildcard,

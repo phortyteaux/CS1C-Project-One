@@ -51,85 +51,22 @@
 #include "window.h"
 #include "teamInfo.h"
 #include "extra_functions.h"
-#include <QApplication>
-#include <QStandardItemModel>
-#include <QTime>
-#include <QFile>
-#include <cstdio>
-#include <QtCore>
-
-void addTeam(QAbstractItemModel *model, const QString &teamName,
-             const QString &stadiumName, const QString &seatingCapacity,
-             const QString &location, const QString &conference,
-             const QString &division, const QString &surfaceType,
-             const QString &stadiumRoofType, const QString &dateOpened)
-{
-    model->insertRow(0);
-    model->setData(model->index(0, 0), teamName);
-    model->setData(model->index(0, 1), stadiumName);
-    model->setData(model->index(0, 2), seatingCapacity);
-    model->setData(model->index(0, 3), location);
-    model->setData(model->index(0, 4), conference);
-    model->setData(model->index(0, 5), division);
-    model->setData(model->index(0, 6), surfaceType);
-    model->setData(model->index(0, 7), stadiumRoofType);
-    model->setData(model->index(0, 8), dateOpened);
-}
-
-QAbstractItemModel *createTeamModel(QObject *parent, vector<teamInfo> &teamInfoVec)
-{
-    // first two args define number of headers/columns
-    QStandardItemModel *model = new QStandardItemModel(0, 9, parent);
-
-
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Team Name"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Stadium Name"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Seating Capacity"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Location"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Conference"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Division"));
-    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Surface Type"));
-    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Stadium Roof Type"));
-    model->setHeaderData(8, Qt::Horizontal, QObject::tr("Date Opened"));
-
-    // works for first 30 teams in .csv
-    for(int i = 0; i < teamInfoVec.size() && i <= 30; i++)
-    {
-        QString qTeamName = QString::fromStdString(teamInfoVec[i].getTeamName());
-        QString qStadiumName = QString::fromStdString(teamInfoVec[i].getStadiumName());
-        QString qSeatingCapacity = QString::fromStdString(teamInfoVec[i].getSeatingCapacity());
-        QString qLocation = QString::fromStdString(teamInfoVec[i].getStadiumLocation());
-        QString qConference = QString::fromStdString(teamInfoVec[i].getConference());
-        QString qDivision = QString::fromStdString(teamInfoVec[i].getDivision());
-        QString qSurfaceType = QString::fromStdString(teamInfoVec[i].getTypeOfSurface());
-        QString qStadiumRoofType = QString::fromStdString(teamInfoVec[i].getTypeOfRoof());
-        QString qDateOpened = QString::fromStdString(teamInfoVec[i].getDateOpened());
-        addTeam(model, qTeamName, qStadiumName, qSeatingCapacity, qLocation,
-                qConference, qDivision, qSurfaceType, qStadiumRoofType, qDateOpened);
-    }
-
-    return model;
-}
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     Window window;
-    //QAbstractItemModel *subsetModel;
-    vector<teamInfo> mainInfoVec(35); //originally (35)
-    vector<teamInfo> AFCInfoVec;
+    vector<teamInfo> mainInfoVec; //source document contains 33 teams by default
     fstream inFile;
     inFile.open("C:/Qt/Examples/Qt-6.0.0/widgets/itemviews/basicsortfiltermodel/nfl.csv");
-    string temp="";
-    getline(inFile, temp); //removes line containing column titles
-    for(auto &elem : mainInfoVec)
+    teamInfo tempElement;
+    while(!inFile.eof())
     {
-        elem.read(inFile);
+        tempElement.read(inFile);
+        mainInfoVec.push_back(tempElement);
     }
     inFile.close();
-    AFCInfoVec = createDataSubset(mainInfoVec,"AFC");
-    //cout << "size of AFCInfoVec: " << AFCInfoVec.size() << endl;
-    window.setSourceModel(createTeamModel(&window, mainInfoVec)/**/); //AFCInfoVec
+    window.setSourceModel(createTeamModel(&window, mainInfoVec));
     window.show();
     return app.exec();
 }

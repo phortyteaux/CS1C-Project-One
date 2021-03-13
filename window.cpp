@@ -118,6 +118,9 @@ Window::Window()
 
     stadiumCapacityLabel = new QLabel(tr("total capacity"));
 
+    calculateTotalButton = new QPushButton();
+    calculateTotalButton->setText("Calculate Total");
+
     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &Window::filterRegularExpressionChanged);
     connect(filterSyntaxComboBox, &QComboBox::currentIndexChanged,
@@ -128,6 +131,8 @@ Window::Window()
             this, &Window::filterRegularExpressionChanged);
     connect(sortCaseSensitivityCheckBox, &QAbstractButton::toggled,
             this, &Window::sortChanged);
+    connect(calculateTotalButton, &QPushButton::released,
+            this, &Window::calculateCapacity);
 
     sourceGroupBox = new QGroupBox(tr("Original Model"));
     proxyGroupBox = new QGroupBox(tr("Teams in the League")); // Sorted/Filtered Model
@@ -148,6 +153,7 @@ Window::Window()
     proxyLayout->addWidget(stadiumCapacityLabel, 3, 0);
     //proxyLayout->addWidget(filterCaseSensitivityCheckBox, 4, 0, 1, 2);
     //proxyLayout->addWidget(sortCaseSensitivityCheckBox, 4, 2); // to me
+    proxyLayout->addWidget(calculateTotalButton, 3, 1);
     proxyGroupBox->setLayout(proxyLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -225,7 +231,8 @@ void Window::sortChanged()
                                                      : Qt::CaseInsensitive);
 }
 
-// currently untested; fingers crossed // need to add button & connect with this slot
+// currently untested; fingers crossed
+// need to add button & connect with this slot
 void Window::calculateCapacity()
 {
     const int STADIUM_NAMES = 1;       // column with stadium names
@@ -236,12 +243,23 @@ void Window::calculateCapacity()
     {
         if(std::count(countedStadiums.begin(), countedStadiums.end(), proxyModel->data(proxyModel->index(row, STADIUM_NAMES))))
         {
-            std::cout << "already counted" << std::endl;
+            QString temp;
+            temp = proxyModel->data(proxyModel->index(row, STADIUM_NAMES)).toString();
+            std::cout << "already counted " << temp.toStdString() << std::endl;
         }
         else
         {
+            int tempInt;
+            QString tempQString;
+            std::string tempString;
             countedStadiums.push_back(proxyModel->data(proxyModel->index(row, STADIUM_NAMES)));
-            result += proxyModel->data(proxyModel->index(row, SEATING_CAPACITY)).toInt();
+            tempQString = proxyModel->data(proxyModel->index(row, SEATING_CAPACITY)).toString();
+            tempString = tempQString.toStdString();
+            tempString.erase(std::remove(tempString.begin(), tempString.end(), ','), tempString.end());
+            tempInt = stoi(tempString);
+            result += tempInt;
+            std::cout << "tempInt: " << tempInt/*tempString*/ << ", ";
+            std::cout << "result: " << result << std::endl;
         }
     }
     stadiumCapacityLabel->setText(QString::number(result));
