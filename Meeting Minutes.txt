@@ -19,3 +19,6 @@
   -assigned stories 9 & 10 to Johnny & Max
   -assigned integration of calculating total seating capacity to Joy & Aileen
   -planned to finalize doxygen comments after finishing coding (ideally by 3/10)
+
+3/12 Sprint 3 check-in
+  -went over progress on assigned tasks
