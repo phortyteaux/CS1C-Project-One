@@ -5,10 +5,13 @@
 #include <string>
 #include "interactivepamphlet.h"
 
+/**
+ *  @brief The number of columns for the data to be displayed in.
+ */
 const int NUM_COLUMNS = 9;
 
 /**
- * @brief textColor
+ * @brief textColor.
  * @param palette
  * @return
  */
@@ -18,7 +21,7 @@ static inline QColor textColor(const QPalette &palette)
 }
 
 /**
- * @brief setTextColor
+ * @brief setTextColor.
  * @param w
  * @param c
  */
@@ -32,16 +35,16 @@ static void setTextColor(QWidget *w, const QColor &c)
 }
 
 /**
- * @brief InteractivePamphlet::InteractivePamphlet
+ * @brief InteractivePamphlet::InteractivePamphlet.
  */
 InteractivePamphlet::InteractivePamphlet()
 {
     proxyModel = new QSortFilterProxyModel;
 
-    sourceView = new QTreeView;
-    sourceView->setRootIsDecorated(false);
-    sourceView->setAlternatingRowColors(true);
-    sourceView->setSortingEnabled(true);
+//    sourceView = new QTreeView;
+//    sourceView->setRootIsDecorated(false);
+//    sourceView->setAlternatingRowColors(true);
+//    sourceView->setSortingEnabled(true);
 
     proxyView = new QTreeView;
     proxyView->setRootIsDecorated(false);
@@ -50,20 +53,22 @@ InteractivePamphlet::InteractivePamphlet()
     proxyView->setSortingEnabled(true);
     proxyView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+    // trying to get rid of these two usused check boxes
     sortCaseSensitivityCheckBox = new QCheckBox(tr("Case sensitive sorting"));
     filterCaseSensitivityCheckBox = new QCheckBox(tr("Case sensitive filter"));
 
     filterPatternLineEdit = new QLineEdit;
     filterPatternLineEdit->setClearButtonEnabled(true);
-    filterPatternLabel = new QLabel(tr("&Filter pattern:"));
+    filterPatternLabel = new QLabel(tr("&Filter Column:"));
     filterPatternLabel->setBuddy(filterPatternLineEdit);
 
+    // unsued trying to get rid of by taking out the enum in InteractivePamphlet and
+    // setting the choice to only fixed string input
     filterSyntaxComboBox = new QComboBox;
     filterSyntaxComboBox->addItem(tr("Regular expression"), RegularExpression);
     filterSyntaxComboBox->addItem(tr("Wildcard"), Wildcard);
     filterSyntaxComboBox->addItem(tr("Fixed string"), FixedString);
-
-    filterSyntaxLabel = new QLabel(tr("Filter &Column:"));
+    filterSyntaxLabel = new QLabel(tr("Filter &syntax:"));
     filterSyntaxLabel->setBuddy(filterSyntaxComboBox);
 
     filterColumnComboBox = new QComboBox;
@@ -77,29 +82,35 @@ InteractivePamphlet::InteractivePamphlet()
     filterColumnComboBox->addItem(tr("Stadium Roof Type"));
     filterColumnComboBox->addItem(tr("Date Opened"));
 
-    filterColumnLabel = new QLabel(tr("Filter &column:"));
+    filterColumnLabel = new QLabel(tr("Filter &Column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
 
     stadiumCapacityLabel = new QLabel(tr("total capacity"));
 
     calculateTotalButton = new QPushButton();
-    calculateTotalButton->setText("Calculate Total");
+    calculateTotalButton->setText("Calculate Total Seating Capacity");
 
     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &InteractivePamphlet::filterRegularExpressionChanged);
+
+    // connecting the syntax combo box that doesn't get used
     connect(filterSyntaxComboBox, &QComboBox::currentIndexChanged,
             this, &InteractivePamphlet::filterRegularExpressionChanged);
+
     connect(filterColumnComboBox, &QComboBox::currentIndexChanged,
             this, &InteractivePamphlet::filterColumnChanged);
+
+    // connnecting the buttons that don't get used
     connect(filterCaseSensitivityCheckBox, &QAbstractButton::toggled,
             this, &InteractivePamphlet::filterRegularExpressionChanged);
     connect(sortCaseSensitivityCheckBox, &QAbstractButton::toggled,
             this, &InteractivePamphlet::sortChanged);
+
     connect(calculateTotalButton, &QPushButton::released,
             this, &InteractivePamphlet::calculateCapacity);
 
 //    sourceGroupBox = new QGroupBox(tr("Original Model"));
-    proxyGroupBox = new QGroupBox(tr("Teams in the National Football League")); // Sorted/Filtered Model
+    proxyGroupBox = new QGroupBox(tr("Teams in the NFL")); // Sorted/Filtered Model
 
     QHBoxLayout *sourceLayout = new QHBoxLayout;
     //sourceLayout->addWidget(sourceView);
@@ -155,7 +166,8 @@ void InteractivePamphlet::setSourceModel(QAbstractItemModel *model) /**/
 }
 
 /**
- * @brief InteractivePamphlet::filterRegularExpressionChanged
+ * @brief InteractivePamphlet::filterRegularExpressionChanged.
+ * Modify this function so that only fixed string is accepted.
  */
 void InteractivePamphlet::filterRegularExpressionChanged()
 {

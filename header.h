@@ -2,13 +2,13 @@
 #define HEADER_H
 
 #include "team.h"
-//#include "interactivepamphlet.h"
+#include "interactivepamphlet.h"
 #include <QApplication>
 #include <QStandardItemModel>
-//#include <QTime>
-//#include <QFile>
+#include <QTime>
+#include <QFile>
 #include <cstdio>
-//#include <QtCore>
+#include <QtCore>
 
 vector<team> createDataSubset(vector<team>, string);
 

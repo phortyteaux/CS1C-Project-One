@@ -2,8 +2,6 @@
 #include "team.h"
 #include "header.h"
 
-#include <QApplication>
-
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +18,8 @@ int main(int argc, char *argv[])
     /**
      * @brief The input file is opened to the correct path.
      */
-    inFile.open("/Users/johnny/Desktop/IJLAProject1/nfl.csv");
+    // inFile.open("/Users/johnny/Desktop/IJLAProject1/nfl.csv");
+    inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-main/nfl.csv");
 
     // this loops through the input file and every loop reads in the data into a new team object
     // in the team vector. terminates at the end of file flag

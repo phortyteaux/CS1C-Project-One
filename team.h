@@ -10,9 +10,12 @@
  */
 
 #include <string> /** @include string */
+#include <iomanip> /** @include iomanip */
 #include <vector> /** @include vector */
 #include <fstream> /** @include fstream */
 #include <iostream> /** @include iostream */
+#include <cstring> /** @include cstring */
+#include <algorithm> /** @include algorithm */
 
 using namespace std;
 
