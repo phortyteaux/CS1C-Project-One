@@ -231,13 +231,11 @@ void Window::sortChanged()
                                                      : Qt::CaseInsensitive);
 }
 
-// currently untested; fingers crossed
-// need to add button & connect with this slot
 void Window::calculateCapacity()
 {
     const int STADIUM_NAMES = 1;       // column with stadium names
     const int SEATING_CAPACITY = 2;    // column with seating capacity
-    QVector<QVariant> countedStadiums; //might need to specify some type of string
+    QVector<QVariant> countedStadiums;
     int result = 0;
     for(int row = 0; row < proxyModel->rowCount(); row++)
     {
