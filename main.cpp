@@ -1,41 +1,127 @@
-#include "interactivepamphlet.h"
-#include "team.h"
-#include "header.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "teams.h"
+
+#include <QApplication>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QtAlgorithms>
+
+int convertSeating(string&, int&);
+int convertDate(string&, int&);
 
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
-    InteractivePamphlet window;
-    vector<team> teamVec;
 
-    /**
-     * @brief An fstream object declared for the input file.
-     * Contains all information regarding the NFL teams.
-     */
-    fstream inFile;
+        string name;
+        string stadium;
+        string seating;
+        string local;
+        string confer;
+        string div;
+        string surface;
+        string roof;
+        string date;
 
-    /**
-     * @brief The input file is opened to the correct path.
-     */
-    // inFile.open("/Users/johnny/Desktop/IJLAProject1/nfl.csv");
-    inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-main/nfl.csv");
+        int seatingC;
+        int dateO;
+        int i = 0;
 
-    // this loops through the input file and every loop reads in the data into a new team object
-    // in the team vector. terminates at the end of file flag
-    team tempElement;
-    while (!inFile.eof())
-    {
-        tempElement.read(inFile);
-        teamVec.push_back(tempElement);
-    }
+        const int NUM = 33;
+        Teams teamInfo[NUM];
+        TempClass classTemp[NUM];
 
-    // the input file is closed after all data from the input file has been read in
-    inFile.close();
+        ifstream myfile;
+        myfile.open("C:/Users/joy4h/Documents/proj1/data.txt");
+        if (myfile.is_open())
+        {
+            while (!myfile.eof())
+            {
+                getline(myfile, name);
+                teamInfo[i].setTeamName(name);
 
-    // sets the source widget of the window to the widget
-    window.setSourceModel(createTeamModel(&window, teamVec));
+                getline(myfile, stadium);
+                teamInfo[i].setStadiumName(stadium);
 
-    window.show();
-    return app.exec();
+                getline(myfile, seating);
+                classTemp[i].setSeatingCapacityTemp(seating);
+                convertSeating(seating, seatingC);
+                teamInfo[i].setSeatingCapacity(seatingC);
+
+                getline(myfile, local);
+                teamInfo[i].setLocation(local);
+
+                getline(myfile, confer);
+                teamInfo[i].setConference(confer);
+
+                getline(myfile, div);
+                teamInfo[i].setDivision(div);
+
+                getline(myfile, surface);
+                teamInfo[i].setSurfaceType(surface);
+
+                getline(myfile, roof);
+                teamInfo[i].setRoofType(roof);
+
+                getline(myfile, date);
+                classTemp[i].setDateOpenedTemp(date);
+                convertDate(date, dateO);
+                teamInfo[i].setDateOpened(dateO);
+
+                i++;
+            }
+            myfile.close();
+
+        }
+        else
+        {
+            cout << "Could not access file." << endl;
+           }
+
+         ///This is a for loop that puts the stadium names into the stad array
+            string stads[33];
+           for (int i = 0; i < 33; i++) {
+
+              stads[i]= teamInfo[i].stadiumName;
+           }
+         ///This finds the size of the array
+           int SIZE = sizeof(stads) / sizeof(stads[0]);
+         ///This sorts the array in alphabetical order
+           sort(stads, stads + SIZE);
+
+           for (int i = 0; i < 33; i++) {
+
+              cout << stads[i] << endl;
+           }
+
+
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
+
+
+int convertSeating(string& seating, int& seatingC)
+{
+    stringstream ss;
+
+    ss << seating;
+    ss >> seatingC;
+
+    return seatingC;
+}
+
+int convertDate(string& date, int& dateO)
+{
+    stringstream ss;
+
+    ss << date;
+    ss >> dateO;
+
+    return dateO;
+
+}
+
