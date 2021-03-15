@@ -4,7 +4,9 @@
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
-#pragma once
+#ifndef TEAM_H_
+#define TEAM_H_
+
 #include <string>
 #include <cstring>
 #include <iomanip>
@@ -171,4 +173,4 @@ public:
     void read(fstream &inFile);
 };
 
-
+#endif // TEAM_H_

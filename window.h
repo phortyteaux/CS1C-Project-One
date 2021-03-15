@@ -1,8 +1,9 @@
 /**
  * @file window.h
  *
- *
- *
+ *  @class Window
+ *  Defines the content of the main window of the interactive pamphlet app.
+ *  @authors
  */
 
 #ifndef WINDOW_H
@@ -10,7 +11,6 @@
 
 #include <QWidget>
 #include <QtCore>
-
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
@@ -20,6 +20,7 @@ class QGroupBox;
 class QLabel;
 class QLineEdit;
 class QSortFilterProxyModel;
+class QInputDialog;
 class QTreeView;
 class QPushButton;
 class QMenuBar;
@@ -40,8 +41,8 @@ public:
     Window();
 
     /**
-     * @brief setSourceModel
-     * @param model
+     * @brief setSourceModel Sets the source model to be displayed in the widget.
+     * @param model A pointer to the QAbstractItem containing the source model.
      */
     void setSourceModel(QAbstractItemModel *model); /**/
     //void setProxyView(QAbstractItemModel *model);
@@ -168,6 +169,8 @@ private:
      * Pointer to a QComboBox object.
      */
     QComboBox *filterColumnComboBox;
+
+    QInputDialog *login;
 
     QAction *helpMeAct;
 

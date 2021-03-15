@@ -1,10 +1,24 @@
+/**
+  * @file createTeamModel.cpp
+  * @brief createTeamModel.cpp
+  * Contains definition of the createTeamModel function.
+  * @authors
+  */
+
 #include "extra_functions.h"
 
+/**
+ * @brief createTeamModel
+ * @param parent
+ * @param teamVec
+ * @return
+ */
 QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
 {
-    // first two args define number of headers/columns
+    /** @brief model
+     *  Defines the data passed to the QTreeView, that sorts and displays the information.
+     */
     QStandardItemModel *model = new QStandardItemModel(0, 9, parent);
-
 
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Team Name"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Stadium Name"));

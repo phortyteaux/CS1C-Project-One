@@ -1,6 +1,6 @@
 /**
- * @file
- * @brief
+ * @file window.cpp
+ * @brief window.cpp
  *
  * @authors
  */
@@ -8,18 +8,32 @@
 #include <QtWidgets>
 #include <QVector>
 #include <QtAlgorithms>
+#include <QInputDialog>
 #include <iostream>
 #include <string>
 #include "window.h"
+#include "login.h"
 
+/**
+ * @brief NUM_COLUMNS
+ */
 const int NUM_COLUMNS = 9;
 
+/**
+ * @brief textColor
+ * @param palette
+ * @return
+ */
 static inline QColor textColor(const QPalette &palette)
 {
     return palette.color(QPalette::Active, QPalette::Text);
 }
 
-
+/**
+ * @brief setTextColor
+ * @param w
+ * @param c
+ */
 static void setTextColor(QWidget *w, const QColor &c)
 {
     auto palette = w->palette();
@@ -29,7 +43,9 @@ static void setTextColor(QWidget *w, const QColor &c)
     }
 }
 
-
+/**
+ * @brief Window::Window
+ */
 Window::Window()
 {
     proxyModel = new QSortFilterProxyModel;
@@ -146,8 +162,9 @@ Window::Window()
     createMenus();
 }
 
-
-
+/**
+ * @brief Window::createActions
+ */
 void Window::createActions()
 {
     contactAct = new QAction(tr("Contact Us"), this);
@@ -167,10 +184,11 @@ void Window::createActions()
     connect(addTeamAct, &QAction::triggered, this, &Window::addTeamRunTime);
 }
 
-
+/**
+ * @brief Window::createMenus
+ */
 void Window::createMenus()
 {
-    //kek $
     menuBar = new QMenuBar(this);
     adminMenu = menuBar->addMenu(tr("Admin"));
     adminMenu->addAction(loginAct);
@@ -181,31 +199,55 @@ void Window::createMenus()
     helpMenu->addAction(helpMeAct);
 }
 
-
+/**
+ * @brief Window::contactUs
+ */
 void Window::contactUs()
 {
     //
 }
 
-
+/**
+ * @brief Window::helpMe
+ */
 void Window::helpMe()
 {
     //
 }
 
-
+/**
+ * @brief Window::adminLogin
+ */
 void Window::adminLogin()
 {
-    //
+    QInputDialog *login = new Login(this);
+
+    login->show();
+
+    QString password = "Password";
+
+    if (login->textValue() == password)
+    {
+        // set a bool to true that allows the add team window, when clicked to open to another qinputdialog
+    }
+    else
+    {
+        // reset the login window
+    }
 }
 
-
+/**
+ * @brief Window::addTeamRunTime
+ */
 void Window::addTeamRunTime()
 {
     //
 }
 
-
+/**
+ * @brief Window::setSourceModel
+ * @param model
+ */
 void Window::setSourceModel(QAbstractItemModel *model) /**/
 {
     proxyModel->setSourceModel(model);
@@ -216,7 +258,9 @@ void Window::setSourceModel(QAbstractItemModel *model) /**/
     }
 }
 
-
+/**
+ * @brief Window::filterRegularExpressionChanged
+ */
 void Window::filterRegularExpressionChanged()
 {
     Syntax s = Syntax(filterSyntaxComboBox->itemData(filterSyntaxComboBox->currentIndex()).toInt());
@@ -248,12 +292,18 @@ void Window::filterRegularExpressionChanged()
     }
 }
 
+/**
+ * @brief Window::filterColumnChanged
+ */
 void Window::filterColumnChanged()
 {
     proxyModel->setFilterKeyColumn(filterColumnComboBox->currentIndex());
     sourceView->sortByColumn(filterColumnComboBox->currentIndex(), Qt::AscendingOrder);
 }
 
+/**
+ * @brief Window::sortChanged
+ */
 void Window::sortChanged()
 {
     proxyModel->setSortCaseSensitivity(
@@ -261,12 +311,23 @@ void Window::sortChanged()
                                                      : Qt::CaseInsensitive);
 }
 
+/**
+ * @brief Window::calculateCapacity
+ */
 void Window::calculateCapacity()
 {
-    const int STADIUM_NAMES = 1;       // column with stadium names
-    const int SEATING_CAPACITY = 2;    // column with seating capacity
+    const int STADIUM_NAMES = 1;       /** @brief STADIUM_NAMES Column number with stadium names. */
+    const int SEATING_CAPACITY = 2; /** @brief SEATING_CAPACITY Column number with seating capacity. */
+
+    /**
+     * @brief countedStadiums Contains the stadiums already counted in the total capacity.
+     * Used in order to avoid repeats in the count of total seating capacity.
+     */
     QVector<QVariant> countedStadiums;
+
+    /** @brief result Holds the total calculated seats. */
     int result = 0;
+
     for(int row = 0; row < proxyModel->rowCount(); row++)
     {
         if(std::count(countedStadiums.begin(), countedStadiums.end(),
@@ -274,7 +335,6 @@ void Window::calculateCapacity()
         {
             QString temp;
             temp = proxyModel->data(proxyModel->index(row, STADIUM_NAMES)).toString();
-            std::cout << "already counted " << temp.toStdString() << std::endl;
         }
         else
         {
@@ -287,8 +347,6 @@ void Window::calculateCapacity()
             tempString.erase(std::remove(tempString.begin(), tempString.end(), ','), tempString.end());
             tempInt = stoi(tempString);
             result += tempInt;
-            // std::cout << "tempInt: " << tempInt << ", ";
-            // std::cout << "result: " << result << std::endl;
         }
     }
     calculatedCapacityLabel->setText(QString::number(result));
