@@ -64,6 +64,10 @@ class QLineEdit;
 class QSortFilterProxyModel;
 class QTreeView;
 class QPushButton;
+class QMenu;
+class QMenuBar;
+class QAction;
+class QSpacerItem;
 QT_END_NAMESPACE
 
 class Window : public QWidget
@@ -81,10 +85,16 @@ private slots:
     void filterColumnChanged();
     void sortChanged();
     void calculateCapacity();
+    // these four below this comment need to be implemented
+    void contactUs();
+    void helpMe();
+    void adminLogin();
+    void addTeamRunTime();
 
 private:
     QSortFilterProxyModel *proxyModel;
-
+    //QWidget *topFiller;
+    QSpacerItem *topFiller;
     QGroupBox *sourceGroupBox;
     QGroupBox *proxyGroupBox;
     QTreeView *sourceView;
@@ -103,9 +113,17 @@ private:
         Wildcard,
         FixedString
     };
-
     QComboBox *filterSyntaxComboBox;
     QComboBox *filterColumnComboBox;
+    QAction *helpMeAct;
+    QAction *contactAct;
+    QAction *loginAct;
+    QAction *addTeamAct;
+    QMenuBar *menuBar;
+    QMenu *adminMenu;
+    QMenu *helpMenu;
+    void createActions();
+    void createMenus();
 };
 
 #endif // WINDOW_H

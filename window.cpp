@@ -135,15 +135,24 @@ Window::Window()
     connect(calculateTotalButton, &QPushButton::released,
             this, &Window::calculateCapacity);
 
-    sourceGroupBox = new QGroupBox(tr("Original Model"));
+    // GroupBox even with flat == true creates a horizontal line at the top
+    sourceGroupBox = new QGroupBox(tr("")); // Original Model
+    sourceGroupBox->setFlat(true);
     proxyGroupBox = new QGroupBox(tr("Teams in the League")); // Sorted/Filtered Model
+
+    topFiller = new QSpacerItem(5, 5);
+    //topFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QHBoxLayout *sourceLayout = new QHBoxLayout;
     //sourceLayout->addWidget(sourceView);
+    //sourceLayout->insertSpacing(0, 1000);
+    //sourceLayout->setContentsMargins(5, 5, 5, 5);
+    sourceLayout->addItem(topFiller);
     sourceGroupBox->setLayout(sourceLayout);
 
     // had everything but the proxyView/prpoxyGroupBox commented out
     QGridLayout *proxyLayout = new QGridLayout;
+    //proxyLayout->addWidget(topFiller);
     proxyLayout->addWidget(proxyView, 0, 0, 1, 3);
     proxyLayout->addWidget(filterPatternLabel, 1, 0); // from me
     proxyLayout->addWidget(filterPatternLineEdit, 1, 1, 1, 2);
@@ -160,7 +169,7 @@ Window::Window()
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
-    //mainLayout->addWidget(sourceGroupBox);
+    mainLayout->addWidget(sourceGroupBox);
     mainLayout->addWidget(proxyGroupBox);
 
     setLayout(mainLayout);
@@ -176,8 +185,57 @@ Window::Window()
     filterPatternLineEdit->setText("");
     filterCaseSensitivityCheckBox->setChecked(false); //both were true
     sortCaseSensitivityCheckBox->setChecked(false);
+
+    createActions();
+    createMenus();
 }
 
+void Window::createActions()
+{
+    contactAct = new QAction(tr("Contact Us"), this);
+    contactAct->setStatusTip(tr("Email the devs"));
+    connect(contactAct, &QAction::triggered, this, &Window::contactUs);
+
+    helpMeAct = new QAction(tr("Help"), this);
+    helpMeAct->setStatusTip(tr("Displays help info"));
+    connect(helpMeAct, &QAction::triggered, this, &Window::helpMe);
+
+    loginAct = new QAction(tr("Login"), this);
+    loginAct->setStatusTip(tr("Login as admin"));
+    connect(loginAct, &QAction::triggered, this, &Window::adminLogin);
+
+    addTeamAct = new QAction(tr("New team"), this);
+    addTeamAct->setStatusTip(tr("Add a new team"));
+    connect(addTeamAct, &QAction::triggered, this, &Window::addTeamRunTime);
+}
+void Window::createMenus()
+{
+    //kek $
+    menuBar = new QMenuBar(this);
+    adminMenu = menuBar->addMenu(tr("Admin"));
+    adminMenu->addAction(loginAct);
+    adminMenu->addAction(addTeamAct);
+
+    helpMenu = menuBar->addMenu(tr("Help"));
+    helpMenu->addAction(contactAct);
+    helpMenu->addAction(helpMeAct);
+}
+void Window::contactUs()
+{
+    //
+}
+void Window::helpMe()
+{
+    //
+}
+void Window::adminLogin()
+{
+    //
+}
+void Window::addTeamRunTime()
+{
+    //
+}
 void Window::setSourceModel(QAbstractItemModel *model) /**/
 {
     proxyModel->setSourceModel(model);
