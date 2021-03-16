@@ -1,11 +1,25 @@
-#include "header.h"
+/**
+  * @file createTeamModel.cpp
+  * @brief createTeamModel.cpp
+  * Contains definition of the createTeamModel function.
+  * @authors
+  */
 
+#include "extra_functions.h"
+
+/**
+ * @brief createTeamModel
+ * @param parent
+ * @param teamVec
+ * @return
+ */
 QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
 {
-    // first two args define number of
+    /** @brief model
+     *  Defines the data passed to the QTreeView, that sorts and displays the information.
+     */
     QStandardItemModel *model = new QStandardItemModel(0, 9, parent);
 
-    // headers of the model are defined here
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Team Name"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Stadium Name"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Seating Capacity"));
@@ -16,8 +30,6 @@ QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Stadium Roof Type"));
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("Date Opened"));
 
-    // every iteration converts every member of the team class, converts it to a qstring
-    // and stores that qstring in
     for(unsigned int i = 0; i < teamVec.size(); i++)
     {
         QString qTeamName = QString::fromStdString(teamVec[i].getTeamName());

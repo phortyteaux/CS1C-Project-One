@@ -1,31 +1,28 @@
-#ifndef TEAM_H
-#define TEAM_H
-
 /**
- * @file Team.h
- * Holds the definition of the Team class.
- * @class Team
- * Holds all of the information associated with a single NFL team.
+ * @file team.h
+ * Definition of the team class, holding all information regarding a single NFL team.
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
-#include <string> /** @include string */
-#include <iomanip> /** @include iomanip */
-#include <vector> /** @include vector */
-#include <fstream> /** @include fstream */
-#include <iostream> /** @include iostream */
-#include <cstring> /** @include cstring */
-#include <algorithm> /** @include algorithm */
+#ifndef TEAM_H_
+#define TEAM_H_
 
+#include <string>
+#include <cstring>
+#include <iomanip>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class team
 {
 private:
-    /** @param name
+    /** @param teamName
      *  Holds the name of the Team.
      */
-    string name;
+    string teamName;
 
     /** @param stadiumName
      *  Holds the name of a Stadium.
@@ -71,7 +68,7 @@ public:
     /**
      * @brief Set the Team Name data member.
      */
-    void setTeamName(string name);
+    void setTeamName(string teamName);
 
     /**
      * @brief Set the Stadium Name data member.
@@ -176,5 +173,4 @@ public:
     void read(fstream &inFile);
 };
 
-#endif // TEAM_H
-
+#endif // TEAM_H_

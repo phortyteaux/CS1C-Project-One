@@ -1,41 +1,47 @@
-#include "interactivepamphlet.h"
+#include "window.h"
 #include "team.h"
-#include "header.h"
-
+#include "extra_functions.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    InteractivePamphlet window;
-    vector<team> teamVec;
+    Window window;
 
     /**
-     * @brief An fstream object declared for the input file.
-     * Contains all information regarding the NFL teams.
+     * @brief mainInfoVec
+     * A vector holding all of the team objects in the input file.
+     */
+    vector<team> mainInfoVec;
+
+    /**
+     * @brief inFile.
+     * An fstream object representing the input data.
      */
     fstream inFile;
 
     /**
-     * @brief The input file is opened to the correct path.
-     */
-    // inFile.open("/Users/johnny/Desktop/IJLAProject1/nfl.csv");
-    inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-main/nfl.csv");
+      * @brief Opens the input file containing all information regarding NFL.
+      */
+    // inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-QtFiles/nfl.csv");
+    inFile.open("/Users/johnny/Desktop/CS1C-Project-One-Documented/nfl.csv");
 
-    // this loops through the input file and every loop reads in the data into a new team object
-    // in the team vector. terminates at the end of file flag
     team tempElement;
-    while (!inFile.eof())
+
+    /**
+      * @brief This loop iterates through the file until end of file flag.
+      */
+    while(!inFile.eof())
     {
         tempElement.read(inFile);
-        teamVec.push_back(tempElement);
+        mainInfoVec.push_back(tempElement);
     }
 
-    // the input file is closed after all data from the input file has been read in
+    /**
+      * @brief Closes the input file.
+      */
     inFile.close();
 
-    // sets the source widget of the window to the widget
-    window.setSourceModel(createTeamModel(&window, teamVec));
-
+    window.setSourceModel(createTeamModel(&window, mainInfoVec));
     window.show();
     return app.exec();
 }

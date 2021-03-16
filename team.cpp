@@ -1,22 +1,25 @@
 /**
- * @file Team.cpp Holds implementation of methods defined in Team.
+ * @file team.cpp
+ * Holds implementation of methods defined in Team.
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
-#include "team.h" /** @include team.h */
+#include "team.h"
 
 /**
  * @brief A setter for the team name of a team object.
- * @param name The team name to be stored in the team object.
+ * @param teamName
+ * The team name to be stored in the team object.
  */
-void team::setTeamName(string name)
+void team::setTeamName(string teamName)
 {
-    this->name = name;
+    this->teamName = teamName;
 }
 
 /**
  * @brief Set the Stadium Name data member.
- * @param stadiumName Holds the stadium name.
+ * @param stadiumName
+ * Holds the stadium name.
  */
 void team::setStadiumName(string stadiumName)
 {
@@ -25,7 +28,8 @@ void team::setStadiumName(string stadiumName)
 
 /**
  * @brief Set the Seating Capacity data member.
- * @param seatingCapacity Holds the max seating capacity of the stadium.
+ * @param seatingCapacity
+ * Holds the max seating capacity of the stadium.
  */
 void team::setSeatingCapacity(string seatingCapacity)
 {
@@ -34,7 +38,8 @@ void team::setSeatingCapacity(string seatingCapacity)
 
 /**
  * @brief Set the Stadium Location data member.
- * @param location Holds the location of the stadium.
+ * @param location
+ * Holds the location of the stadium.
  */
 void team::setLocation(string location)
 {
@@ -43,7 +48,8 @@ void team::setLocation(string location)
 
 /**
  * @brief A setter for the conference of a team object.
- * @param conference The conference that a team competes in (NFC, AFC, etc).
+ * @param conference
+ * The conference that a team competes in (NFC, AFC, etc).
  */
 void team::setConference(string conference)
 {
@@ -52,7 +58,8 @@ void team::setConference(string conference)
 
 /**
  * @brief A setter for the division of a team object.
- * @param division The division of a team (NFC West, AFC South, etc).
+ * @param division
+ * The division of a team (NFC West, AFC South, etc).
  */
 void team::setDivision(string division)
 {
@@ -61,7 +68,8 @@ void team::setDivision(string division)
 
 /**
  * @brief Set the Surface Type data member.
- * @param surfaceType Holds the type of surface the stadium turf is.
+ * @param surfaceType
+ * Holds the type of surface the stadium turf is.
  */
 void team::setSurfaceType(string surfaceType)
 {
@@ -70,7 +78,8 @@ void team::setSurfaceType(string surfaceType)
 
 /**
  * @brief Set the Roof Type data member.
- * @param roofType Holds the type of roof the stadium has.
+ * @param roofType
+ * Holds the type of roof the stadium has.
  */
 void team::setRoofType(string roofType)
 {
@@ -79,7 +88,8 @@ void team::setRoofType(string roofType)
 
 /**
  * @brief Set the Date Opened data member.
- * @param dateOpened Holds the date that the stadium was opened.
+ * @param dateOpened
+ * Holds the date that the stadium was opened.
  */
 void team::setDateOpened(string dateOpened)
 {
@@ -92,7 +102,7 @@ void team::setDateOpened(string dateOpened)
  */
 string team::getTeamName() const
 {
-    return name;
+    return teamName;
 }
 
 /**
@@ -169,12 +179,13 @@ string team::getDateOpened() const
 
 /**
  * @brief Member function that reads in the data of a Team from a file.
- * @param inFile An input file name specified in main.
+ * @param inFile
+ * An input file name specified in main.
  */
 void team::read(fstream &inFile)
 {
     string temp = "";
-    getline(inFile, name, ',');
+    getline(inFile, teamName, ',');
     getline(inFile, stadiumName, ',');
     getline(inFile, temp, '"');
     getline(inFile, seatingCapacity, '"');
