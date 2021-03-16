@@ -12,3 +12,6 @@ Login::Login(QWidget *parent) : QInputDialog(parent)
     // make sure it is in textinput mode
     setTextEchoMode(QLineEdit::Password);
 }
+
+
+

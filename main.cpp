@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
       * @brief Opens the input file containing all information regarding NFL.
       */
     // inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-QtFiles/nfl.csv");
-    inFile.open("/Users/johnny/Desktop/CS1C-Project-One-Documented/nfl.csv");
+    inFile.open("C:/Users/joy4h/Desktop/MAIN PROJECT/nfl.csv");
 
     team tempElement;
 

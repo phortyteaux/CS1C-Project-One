@@ -11,6 +11,7 @@
 
 #include <QWidget>
 #include <QtCore>
+#include <QApplication>
 
 QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
@@ -28,6 +29,7 @@ class QMenu;
 class QAction;
 class QSpacerItem;
 class QMessageBox;
+class QClipboard;
 QT_END_NAMESPACE
 
 class Window : public QWidget

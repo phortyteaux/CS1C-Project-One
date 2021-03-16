@@ -9,6 +9,7 @@
 #include <QVector>
 #include <QtAlgorithms>
 #include <QInputDialog>
+#include <QDebug>
 #include <iostream>
 #include <string>
 #include "window.h"
@@ -49,6 +50,7 @@ static void setTextColor(QWidget *w, const QColor &c)
  */
 Window::Window()
 {
+
     proxyModel = new QSortFilterProxyModel;
 
     sourceView = new QTreeView;
@@ -170,6 +172,10 @@ Window::Window()
  */
 void Window::createActions()
 {
+    QClipboard *clipboard = QApplication::clipboard();
+    QString originalText = clipboard->text();
+    clipboard->setText("phortyteaux@gmail.com j.wannamaker19@gmail.com ImTechy48@gmail.com joy4haddad@gmail.com");
+
     contactAct = new QAction(tr("Contact Us"), this);
     contactAct->setStatusTip(tr("Email the devs"));
     connect(contactAct, &QAction::triggered, this, &Window::contactUs);
@@ -177,6 +183,7 @@ void Window::createActions()
     helpMeAct = new QAction(tr("Help"), this);
     helpMeAct->setStatusTip(tr("Displays help info"));
     connect(helpMeAct, &QAction::triggered, this, &Window::helpMe);
+    //QMessageBox::information(this, "get help", "use the dop downs to sort by category");
 
     loginAct = new QAction(tr("Login"), this);
     loginAct->setStatusTip(tr("Login as admin"));
@@ -207,7 +214,16 @@ void Window::createMenus()
  */
 void Window::contactUs()
 {
-    //
+
+    QMessageBox::StandardButton reply = QMessageBox::question(this,
+                                                              "Developer Emails", "phortyteaux@gmail.com\nj.wannamaker19@gmail.com\nImTechy48@gmail.com\njoy4haddad@gmail.com\n\n"
+                                                              "Would you like to copy the emails to your clipboard?",
+                                        QMessageBox::Yes | QMessageBox::No);
+                                if (reply == QMessageBox::Yes)
+                                {
+                                    QApplication::clipboard();
+
+                                }
 }
 
 /**
@@ -215,7 +231,9 @@ void Window::contactUs()
  */
 void Window::helpMe()
 {
-    //
+    QMessageBox::about(this, "Help Menu", "•In the drop down menu next to 'filter column,' choose\n an NFL category in order to sort by.\n"
+                                          "•By choosing one of the categories, you can filter search\n for a specific team using the category you chose.\n"
+                                          "•Pusing the 'Calculate total' button will display the\n total seating capacity accross all the stadiums. ");
 }
 
 /**
