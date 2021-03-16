@@ -256,6 +256,7 @@ void Window::adminLogin()
                 invalidInput->setText(tr("Password is invalid, please try again"));
                 invalidInput->show();
                 this->passwordValid = false;
+                this->adminLogin();
             }
         }
     }
