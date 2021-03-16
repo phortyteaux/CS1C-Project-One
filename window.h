@@ -189,6 +189,8 @@ private:
     void createActions();
 
     void createMenus();
+
+    bool passwordValid;
 };
 
 #endif // WINDOW_H

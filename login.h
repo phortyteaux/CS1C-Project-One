@@ -5,6 +5,7 @@
 
 namespace Ui {
 class Login;
+class QInputDialog;
 }
 
 class Login : public QInputDialog

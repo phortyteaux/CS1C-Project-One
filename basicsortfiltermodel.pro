@@ -19,5 +19,8 @@ INSTALLS += target
 DISTFILES += \
     nfl.csv
 
+FORMS +=
+
+
 
 

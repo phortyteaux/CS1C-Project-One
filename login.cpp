@@ -10,10 +10,10 @@ Login::Login(QWidget *parent) :
     setWindowTitle(tr("Admin Login"));
 
     // set the text for the label to Enter Password
+    setLabelText(tr("Password:"));
 
     // make sure it is in textinput mode
-
-    // make sure the password text input is in echo mode
+    setTextEchoMode(QLineEdit::Password);
 }
 
 Login::~Login()

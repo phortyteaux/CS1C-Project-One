@@ -13,6 +13,7 @@
 #include <string>
 #include "window.h"
 #include "login.h"
+// #include "inputTeam.h"
 
 /**
  * @brief NUM_COLUMNS
@@ -160,6 +161,8 @@ Window::Window()
 
     createActions();
     createMenus();
+
+    passwordValid = false;
 }
 
 /**
@@ -229,10 +232,12 @@ void Window::adminLogin()
     if (login->textValue() == password)
     {
         // set a bool to true that allows the add team window, when clicked to open to another qinputdialog
+        this->passwordValid = true;
     }
     else
     {
         // reset the login window
+        this->passwordValid = false;
     }
 }
 
@@ -241,7 +246,13 @@ void Window::adminLogin()
  */
 void Window::addTeamRunTime()
 {
-    //
+    // check bool if able to add team or not
+    if (passwordValid)
+    {
+        // QInputDialog *inputTeam = new InputTeam(this);
+
+        // inputTeam->show();
+    }
 }
 
 /**
