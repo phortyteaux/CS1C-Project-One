@@ -3,11 +3,13 @@ requires(qtConfig(combobox))
 
 HEADERS     = window.h \
     extra_functions.h \
+    inputTeam.h \
     login.h \
     team.h
 SOURCES     = main.cpp \
               addTeam.cpp \
               createTeamModel.cpp \
+              inputTeam.cpp \
               login.cpp \
               team.cpp \
               window.cpp

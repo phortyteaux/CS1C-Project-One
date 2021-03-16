@@ -1,9 +1,8 @@
 /**
- * @file window.h
- *
+ *  @file window.h
  *  @class Window
- *  Defines the content of the main window of the interactive pamphlet app.
- *  @authors
+ *  @brief Defines the content of the main window of the interactive pamphlet app.
+ *  @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
 #ifndef WINDOW_H
@@ -13,6 +12,7 @@
 #include <QtCore>
 
 QT_BEGIN_NAMESPACE
+class QtCore;
 class QAbstractItemModel;
 class QCheckBox;
 class QComboBox;
@@ -30,6 +30,12 @@ class QSpacerItem;
 class QMessageBox;
 QT_END_NAMESPACE
 
+/**
+ * @brief The Window class is the central widget of the application.
+ * It supports the functionality a viewing a spread of NFL teams, being able to sort by their column
+ * headers (Team Name, Stadium Name, Location, Conference, Division, etc.), calculating the maximum
+ * capacity of seats across all stadiums, and support for an administator login to add a team.
+ */
 class Window : public QWidget
 {
     Q_OBJECT
@@ -45,8 +51,7 @@ public:
      * @brief setSourceModel Sets the source model to be displayed in the widget.
      * @param model A pointer to the QAbstractItem containing the source model.
      */
-    void setSourceModel(QAbstractItemModel *model); /**/
-    //void setProxyView(QAbstractItemModel *model);
+    void setSourceModel(QAbstractItemModel *model);
 
 private slots:
     void filterRegularExpressionChanged();
@@ -171,32 +176,74 @@ private:
      */
     QComboBox *filterColumnComboBox;
 
+    /**
+     * @brief login
+     * Pointer to a QInputDialog object.
+     */
     QInputDialog *login;
 
+    /**
+     * @brief helpMeAct
+     * Pointer to a QAction object.
+     */
     QAction *helpMeAct;
 
+    /**
+     * @brief contactAct
+     * Pointer to a QAction object.
+     */
     QAction *contactAct;
 
+    /**
+     * @brief loginAct
+     * Pointer to a QAction object.
+     */
     QAction *loginAct;
 
+    /**
+     * @brief addTeamAct
+     * Pointer to a QAction object.
+     */
     QAction *addTeamAct;
 
+    /**
+     * @brief menuBar
+     * Pointer to a QMenuBar object.
+     */
     QMenuBar *menuBar;
 
+    /**
+     * @brief adminMenu
+     * Pointer to a QMenu object;
+     */
     QMenu *adminMenu;
 
+    /**
+     * @brief helpMenu
+     * Pointer to a QMenu object.
+     */
     QMenu *helpMenu;
 
+    /**
+     * @brief validInput
+     * Pointer to a QMessageBox object indicating that the login was successful.
+     */
     QMessageBox *validInput;
 
+    /**
+     * @brief invalidInput
+     * Pointer to a QMessageBox object indicating that the login failed.
+     */
     QMessageBox *invalidInput;
-
-    QMessageBox *alreadyLoggedIn;
 
     void createActions();
 
     void createMenus();
 
+    /**
+     * @brief passwordValid
+     * A bool indicating if the entered password by the user is correct or not.
+     */
     bool passwordValid;
 };
 

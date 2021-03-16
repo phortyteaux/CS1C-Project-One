@@ -1,5 +1,20 @@
+
+
 #include "extra_functions.h"
 
+/**
+ * @brief addTeam
+ * @param model
+ * @param teamName
+ * @param stadiumName
+ * @param seatingCapacity
+ * @param location
+ * @param conference
+ * @param division
+ * @param surfaceType
+ * @param stadiumRoofType
+ * @param dateOpened
+ */
 void addTeam(QAbstractItemModel *model, const QString &teamName,
              const QString &stadiumName, const QString &seatingCapacity,
              const QString &location, const QString &conference,

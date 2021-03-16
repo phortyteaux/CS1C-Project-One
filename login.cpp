@@ -1,22 +1,28 @@
+/**
+ *  @file login.cpp
+ *  @class Login
+ *  @brief Defines the content of the login window of the interactive pamphlet app.
+ *  @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
+ */
+
 #include "login.h"
-#include "ui_login.h"
 
-Login::Login(QWidget *parent) :
-    QInputDialog(parent),
-    ui(new Ui::Login)
+/**
+ * @brief Login::Login Constructor of the Login class.
+ * @param parent The parent QWidget that creates an instance of the Login object.
+ */
+Login::Login(QWidget *parent) : QInputDialog(parent)
 {
-    ui->setupUi(this);
-
+    /**
+     * @brief setWindowTitle Sets the title of the window to Admin Login.
+     */
     setWindowTitle(tr("Admin Login"));
 
-    // set the text for the label to Enter Password
+    /** @brief setlabelText sets the text for the label to Enter Password. */
     setLabelText(tr("Password:"));
 
-    // make sure it is in textinput mode
+    /**
+     * @brief setTextEchoMode Sets the input line to Password mode so the text is hidden when typed.
+     */
     setTextEchoMode(QLineEdit::Password);
-}
-
-Login::~Login()
-{
-    delete ui;
 }

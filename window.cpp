@@ -1,22 +1,22 @@
 /**
  * @file window.cpp
- * @brief window.cpp
- *
+ * @brief window.cpp Defines the behavior of the behavior of a Window object.
+ * Window serves as the central widget in the application, and handles the GUI.
  * @authors
  */
 
 #include <QtWidgets>
 #include <QVector>
 #include <QtAlgorithms>
-#include <QInputDialog>
+#include <QtCore>
 #include <iostream>
 #include <string>
 #include "window.h"
 #include "login.h"
-// #include "inputTeam.h"
+#include "inputTeam.h"
 
 /**
- * @brief NUM_COLUMNS
+ * @brief NUM_COLUMNS Constant representing the number of columns in the QTreeView.
  */
 const int NUM_COLUMNS = 9;
 
@@ -45,7 +45,7 @@ static void setTextColor(QWidget *w, const QColor &c)
 }
 
 /**
- * @brief Window::Window
+ * @brief Window::Window Constructor for the Window class.
  */
 Window::Window()
 {
@@ -89,14 +89,15 @@ Window::Window()
     filterColumnComboBox->addItem(tr("Stadium Roof Type"));
     filterColumnComboBox->addItem(tr("Date Opened"));
 
-    filterColumnLabel = new QLabel(tr("Filter &column:"));
+    filterColumnLabel = new QLabel(tr("Filter &Column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
 
-    stadiumCapacityLabel = new QLabel(tr("Total capacity:"));
+    stadiumCapacityLabel = new QLabel(tr("Total Capacity:"));
     calculatedCapacityLabel = new QLabel(tr(""));
+    calculatedCapacityLabel->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter);
 
     calculateTotalButton = new QPushButton();
-    calculateTotalButton->setText("Calculate total");
+    calculateTotalButton->setText("Calculate Total");
 
     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &Window::filterRegularExpressionChanged);
@@ -227,7 +228,7 @@ void Window::adminLogin()
 
     QString password = "Password";
 
-    if(passwordValid)
+    if (passwordValid)
     {
         QMessageBox *alreadyLoggedIn = new QMessageBox;
         alreadyLoggedIn->setWindowTitle(tr("Error"));
@@ -237,30 +238,28 @@ void Window::adminLogin()
     else
     {
         login->show();
-        if(login->exec() == QDialog::Accepted)
+
+        if (login->exec() == QDialog::Accepted)
         {
-            if(login->textValue() == password)
+            if (login->textValue() == password)
             {
-                std::cout << "Success!" << std::endl;
                 QMessageBox *validInput = new QMessageBox;
-                validInput->setWindowTitle(tr("Success"));
-                validInput->setText(tr("Welcome administrator"));
+                validInput->setWindowTitle(tr("Successful Login"));
+                validInput->setText(tr("Welcome, Administrator"));
                 validInput->show();
                 this->passwordValid = true;
             }
             else
             {
-                std::cout << "Try again!" << std::endl;
                 QMessageBox *invalidInput = new QMessageBox;
-                invalidInput->setWindowTitle(tr("Failure"));
+                invalidInput->setWindowTitle(tr("Failed Login"));
                 invalidInput->setText(tr("Password is invalid, please try again"));
                 invalidInput->show();
                 this->passwordValid = false;
-                this->adminLogin();
+                // this->adminLogin();
             }
         }
     }
-    std::cout << "passwordValid: " << passwordValid << std::endl;
 }
 
 /**
@@ -271,9 +270,9 @@ void Window::addTeamRunTime()
     // check bool if able to add team or not
     if (passwordValid)
     {
-        // QInputDialog *inputTeam = new InputTeam(this);
+         QWidget *inputTeam = new InputTeam(this);
 
-        // inputTeam->show();
+         inputTeam->show();
     }
 }
 
@@ -349,7 +348,7 @@ void Window::sortChanged()
  */
 void Window::calculateCapacity()
 {
-    const int STADIUM_NAMES = 1;       /** @brief STADIUM_NAMES Column number with stadium names. */
+    const int STADIUM_NAMES = 1;    /** @brief STADIUM_NAMES Column number with stadium names. */
     const int SEATING_CAPACITY = 2; /** @brief SEATING_CAPACITY Column number with seating capacity. */
 
     /**

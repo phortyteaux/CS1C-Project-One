@@ -1,10 +1,26 @@
+/**
+ *  @file main.cpp
+ *  @brief Defines the main function of the program.
+ *  @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
+ */
+
 #include "window.h"
 #include "team.h"
 #include "extra_functions.h"
 
+/**
+ * @brief qMain the main function, handles the execution of the application.
+ * @param argc Number of arguments passed as command line parameters.
+ * @param argv Arguments passed as command line parameters.
+ * @return
+ */
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    /**
+     * @brief window Declaring a main window.
+     */
     Window window;
 
     /**
@@ -14,7 +30,7 @@ int main(int argc, char *argv[])
     vector<team> mainInfoVec;
 
     /**
-     * @brief inFile.
+     * @brief inFile
      * An fstream object representing the input data.
      */
     fstream inFile;
@@ -23,10 +39,12 @@ int main(int argc, char *argv[])
       * @brief Opens the input file containing all information regarding NFL.
       */
     inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-QtFiles/nfl.csv");
+
     team tempElement;
 
     /**
       * @brief This loop iterates through the file until end of file flag.
+      * Reads in the data of the NFL into a vector of Team objects.
       */
     while(!inFile.eof())
     {
@@ -39,6 +57,10 @@ int main(int argc, char *argv[])
       */
     inFile.close();
 
+    /**
+      * @brief setSourceModel Sets the source model of the main window to the created by createTeamModel.
+      * A model is created for the NFL Information and passed to the main window from the mainInfoVec.
+      */
     window.setSourceModel(createTeamModel(&window, mainInfoVec));
     window.show();
     return app.exec();

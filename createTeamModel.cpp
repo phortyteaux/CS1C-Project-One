@@ -9,9 +9,9 @@
 
 /**
  * @brief createTeamModel
- * @param parent
- * @param teamVec
- * @return
+ * @param parent A pointer to the base class of a
+ * @param teamVec A vector containing all information regarding the NFL, stored in strings.
+ * @return A QAbstractItemModel, containing all the information regarding the NFL, stored in QStrings.
  */
 QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
 {

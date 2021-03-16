@@ -1,6 +1,6 @@
 /**
  * @file team.h
- * Definition of the team class, holding all information regarding a single NFL team.
+ * @brief Definition of the team class, holding all information regarding a single NFL team.
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
