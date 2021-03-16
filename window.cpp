@@ -229,16 +229,20 @@ void Window::adminLogin()
 
     QString password = "Password";
 
-    if (login->textValue() == password)
+    if(login->exec() == QDialog::Accepted)
     {
-        // set a bool to true that allows the add team window, when clicked to open to another qinputdialog
-        this->passwordValid = true;
+        if(login->textValue() == password)
+        {
+            std::cout << "Success!" << std::endl;
+            this->passwordValid = true;
+        }
+        else
+        {
+            std::cout << "Try again!" << std::endl;
+            this->passwordValid = false;
+        }
     }
-    else
-    {
-        // reset the login window
-        this->passwordValid = false;
-    }
+    std::cout << "passwordValid: " << passwordValid << std::endl;
 }
 
 /**
