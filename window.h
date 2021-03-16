@@ -27,6 +27,7 @@ class QMenuBar;
 class QMenu;
 class QAction;
 class QSpacerItem;
+class QMessageBox;
 QT_END_NAMESPACE
 
 class Window : public QWidget
@@ -185,6 +186,10 @@ private:
     QMenu *adminMenu;
 
     QMenu *helpMenu;
+
+    QMessageBox *validInput;
+
+    QMessageBox *invalidInput;
 
     void createActions();
 

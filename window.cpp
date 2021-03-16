@@ -234,11 +234,19 @@ void Window::adminLogin()
         if(login->textValue() == password)
         {
             std::cout << "Success!" << std::endl;
+            QMessageBox *validInput = new QMessageBox;
+            validInput->setWindowTitle(tr("Success"));
+            validInput->setText(tr("Password is valid"));
+            validInput->show();
             this->passwordValid = true;
         }
         else
         {
             std::cout << "Try again!" << std::endl;
+            QMessageBox *invalidInput = new QMessageBox;
+            invalidInput->setWindowTitle(tr("Failure"));
+            invalidInput->setText(tr("Password is invalid, please try again"));
+            invalidInput->show();
             this->passwordValid = false;
         }
     }
