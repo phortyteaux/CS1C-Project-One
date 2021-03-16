@@ -191,6 +191,8 @@ private:
 
     QMessageBox *invalidInput;
 
+    QMessageBox *alreadyLoggedIn;
+
     void createActions();
 
     void createMenus();

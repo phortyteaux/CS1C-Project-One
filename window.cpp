@@ -225,29 +225,38 @@ void Window::adminLogin()
 {
     QInputDialog *login = new Login(this);
 
-    login->show();
-
     QString password = "Password";
 
-    if(login->exec() == QDialog::Accepted)
+    if(passwordValid)
     {
-        if(login->textValue() == password)
+        QMessageBox *alreadyLoggedIn = new QMessageBox;
+        alreadyLoggedIn->setWindowTitle(tr("Error"));
+        alreadyLoggedIn->setText(tr("You have already logged in"));
+        alreadyLoggedIn->show();
+    }
+    else
+    {
+        login->show();
+        if(login->exec() == QDialog::Accepted)
         {
-            std::cout << "Success!" << std::endl;
-            QMessageBox *validInput = new QMessageBox;
-            validInput->setWindowTitle(tr("Success"));
-            validInput->setText(tr("Password is valid"));
-            validInput->show();
-            this->passwordValid = true;
-        }
-        else
-        {
-            std::cout << "Try again!" << std::endl;
-            QMessageBox *invalidInput = new QMessageBox;
-            invalidInput->setWindowTitle(tr("Failure"));
-            invalidInput->setText(tr("Password is invalid, please try again"));
-            invalidInput->show();
-            this->passwordValid = false;
+            if(login->textValue() == password)
+            {
+                std::cout << "Success!" << std::endl;
+                QMessageBox *validInput = new QMessageBox;
+                validInput->setWindowTitle(tr("Success"));
+                validInput->setText(tr("Password is valid"));
+                validInput->show();
+                this->passwordValid = true;
+            }
+            else
+            {
+                std::cout << "Try again!" << std::endl;
+                QMessageBox *invalidInput = new QMessageBox;
+                invalidInput->setWindowTitle(tr("Failure"));
+                invalidInput->setText(tr("Password is invalid, please try again"));
+                invalidInput->show();
+                this->passwordValid = false;
+            }
         }
     }
     std::cout << "passwordValid: " << passwordValid << std::endl;
