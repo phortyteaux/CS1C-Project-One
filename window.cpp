@@ -244,7 +244,7 @@ void Window::adminLogin()
                 std::cout << "Success!" << std::endl;
                 QMessageBox *validInput = new QMessageBox;
                 validInput->setWindowTitle(tr("Success"));
-                validInput->setText(tr("Password is valid"));
+                validInput->setText(tr("Welcome administrator"));
                 validInput->show();
                 this->passwordValid = true;
             }
