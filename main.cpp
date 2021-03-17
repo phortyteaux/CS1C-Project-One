@@ -6,7 +6,7 @@
 
 #include "window.h"
 #include "team.h"
-#include "extra_functions.h"
+#include "extraFunctions.h"
 
 /**
  * @brief The main function, handles the execution of the application as well as input from file.

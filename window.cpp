@@ -2,7 +2,7 @@
  * @file window.cpp
  * @brief window.cpp Defines the behavior of the behavior of a Window object.
  * Window serves as the central widget in the application, and handles the GUI.
- * @authors
+ * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
 #include <QtWidgets>
@@ -22,9 +22,9 @@
 const int NUM_COLUMNS = 9;
 
 /**
- * @brief textColor
- * @param palette
- * @return
+ * @brief textColor Defines the coloring of the application based on the OS of the user.
+ * @param palette The variable that referes to the coloring of the application.
+ * @return A QColor at every point that it is referenced.
  */
 static inline QColor textColor(const QPalette &palette)
 {
@@ -32,21 +32,21 @@ static inline QColor textColor(const QPalette &palette)
 }
 
 /**
- * @brief setTextColor
- * @param w
- * @param c
+ * @brief setTextColor Sets the color of the text for the application based on the system default of user OS.
+ * @param widget The central widget of the program.
+ * @param color The color of the text used in the widget.
  */
-static void setTextColor(QWidget *w, const QColor &c)
+static void setTextColor(QWidget *widget, const QColor &color)
 {
-    auto palette = w->palette();
-    if (textColor(palette) != c) {
-        palette.setColor(QPalette::Active, QPalette::Text, c);
-        w->setPalette(palette);
+    auto palette = widget->palette();
+    if (textColor(palette) != color) {
+        palette.setColor(QPalette::Active, QPalette::Text, color);
+        widget->setPalette(palette);
     }
 }
 
 /**
- * @brief Window::Window Constructor for the Window class.
+ * @brief Window::Window The default constructor for the Window class.
  */
 Window::Window()
 {
@@ -168,31 +168,32 @@ Window::Window()
     passwordValid = false;
 }
 
-/**
- * @brief Window::createActions Maps the connects between the menu items and the actions required to open the
- * corresponding windows.
- */
+/** @brief Window::createActions Connects menu items with the actions required to open their windows. */
 void Window::createActions()
 {
+    /** @brief Allocates a new Action for contactAct, sets status, and maps connection. */
     contactAct = new QAction(tr("Contact Us"), this);
     contactAct->setStatusTip(tr("Email the devs"));
     connect(contactAct, &QAction::triggered, this, &Window::contactUs);
 
+    /** @brief Allocates a new Action for helpMeAct, sets status, and maps connection. */
     helpMeAct = new QAction(tr("Help"), this);
     helpMeAct->setStatusTip(tr("Displays help info"));
     connect(helpMeAct, &QAction::triggered, this, &Window::helpMe);
 
+    /** @brief Allocates a new Action for loginAct, sets status, and maps connection. */
     loginAct = new QAction(tr("Login"), this);
     loginAct->setStatusTip(tr("Login as admin"));
     connect(loginAct, &QAction::triggered, this, &Window::adminLogin);
 
+    /** @brief Allocates a new Action for addTeamAct, sets status, and maps connection. */
     addTeamAct = new QAction(tr("New team"), this);
     addTeamAct->setStatusTip(tr("Add a new team"));
     connect(addTeamAct, &QAction::triggered, this, &Window::addTeamRunTime);
 }
 
 /**
- * @brief Window::createMenus Creates the menu bar at the top of the Windo object.
+ * @brief Window::createMenus Creates the menu bar at the top of the Window object.
  */
 void Window::createMenus()
 {
@@ -417,7 +418,7 @@ void Window::filterColumnChanged()
 }
 
 /**
- * @brief Window::sortChanged
+ * @brief Window::sortChanged Indicates that the 
  */
 void Window::sortChanged()
 {

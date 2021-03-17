@@ -1,14 +1,13 @@
 /**
   * @file createTeamModel.cpp
-  * @brief createTeamModel.cpp
-  * Contains definition of the createTeamModel function.
+  * @brief createTeamModel.cpp Contains definition of the createTeamModel function.
   * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
   */
 
-#include "extra_functions.h"
+#include "extraFunctions.h"
 
 /**
- * @brief createTeamModel
+ * @brief createTeamModel creates a model to store the information from the vector containing all Teams.
  * @param parent A pointer to the base class of a widget.
  * @param teamVec A vector containing all information regarding the NFL, stored in strings.
  * @return A QAbstractItemModel, containing all the information regarding the NFL, stored in QStrings.

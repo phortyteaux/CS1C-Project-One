@@ -4,7 +4,7 @@
   * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
   */
 
-#include "extra_functions.h"
+#include "extraFunctions.h"
 
 /**
  * @brief addTeam Adds a team to the model passed by pointer.
@@ -30,7 +30,7 @@ void addTeam(QAbstractItemModel *model, const QString &teamName,
       */
     model->insertRow(0);
 
-    /** @brief Adds the QStrings into the . */
+    /** @brief Adds the QStrings into the model, similar to a two dimensional array. */
     model->setData(model->index(0, 0), teamName);
     model->setData(model->index(0, 1), stadiumName);
     model->setData(model->index(0, 2), seatingCapacity);

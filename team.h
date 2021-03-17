@@ -1,5 +1,6 @@
 /**
- * @file team.h
+ * @file team.h Defines the contents of a Team object.
+ * @class team Holds the team name, stadium name, location, capacity, division, etc.
  * @brief Definition of the team class, holding all information regarding a single NFL team.
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
@@ -16,98 +17,63 @@
 #include <algorithm>
 using namespace std;
 
+/** @brief A team object is the basic object that is dealt with in this program. */
 class team
 {
 private:
-    /** @param teamName
-     *  Holds the name of the Team.
-     */
+    /** @param teamName Holds the name of the Team. */
     string teamName;
 
-    /** @param stadiumName
-     *  Holds the name of a Stadium.
-     */
+    /** @param stadiumName Holds the name of a Stadium. */
     string stadiumName;
 
-    /** @param seatingCapacity
-     *  Holds the maximum seating of a Stadium.
-     */
+    /** @param seatingCapacity Holds the maximum seating of a Stadium. */
     string seatingCapacity;
 
-    /** @param location
-     *  Holds the location of a Stadium.
-     */
+    /** @param location Holds the location of a Stadium. */
     string location;
 
-    /** @param conference
-     *  Holds the conference that the Team competes in.
-     */
+    /** @param conference Holds the conference that the Team competes in. */
     string conference;
 
-    /** @param division
-     *  Holds the regional division of the Team.
-     */
+    /** @param division Holds the regional division of the Team. */
     string division;
 
-    /** @param surfaceType
-     *  Holds the material used for the turf of a Stadium.
-     */
+    /** @param surfaceType Holds the material used for the turf of a Stadium. */
     string surfaceType;
 
-    /** @param roofType
-     *  Holds the type of roof of a Stadium.
-     */
+    /** @param roofType Holds the type of roof of a Stadium. */
     string roofType;
 
-    /** @param dateOpened
-     *  Holds the date that a Staium was opened.
-     */
+    /** @param dateOpened Holds the date that a Staium was opened. */
     string dateOpened;
 
 public:
-    /**
-     * @brief Set the Team Name data member.
-     */
+    /** @brief Set the Team Name data member. */
     void setTeamName(string teamName);
 
-    /**
-     * @brief Set the Stadium Name data member.
-     */
+    /** @brief Set the Stadium Name data member. */
     void setStadiumName(string stadiumName);
 
-    /**
-     * @brief Set the Seating Capacity data member.
-     */
+    /** @brief Set the Seating Capacity data member. */
     void setSeatingCapacity(string seatingCapacity);
 
-    /**
-     * @brief Set the Stadium Location data member.
-     */
+    /** @brief Set the Stadium Location data member. */
     void setLocation(string location);
 
-    /**
-     * @brief Set the Conference data member.
-     */
+    /** @brief Set the Conference data member. */
     void setConference(string conference);
 
-    /**
-     * @brief Set the Division data member.
-     */
+    /** @brief Set the Division data member. */
     void setDivision(string division);
 
-    /**
-     * @brief Set the Surface Type data member.
-     */
+    /** @brief Set the Surface Type data member. */
     void setSurfaceType(string surfaceType);
 
-    /**
-     * @brief Set the Roof Type data member.
-     */
+    /** @brief Set the Roof Type data member. */
     void setRoofType(string roofType);
 
-    /**
-     * @brief Set the Date Opened data member.
-     */
+    /** @brief Set the Date Opened data member. */
     void setDateOpened(string dateOpened);
 
 

@@ -1,6 +1,6 @@
 /**
- * @file team.cpp
- * Holds implementation of methods defined in Team.
+ * @file team.cpp Holds implementation of methods defined in Team.
+ * @brief team.cpp Defines the behavior of all Team objects across the program.
  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
@@ -179,8 +179,7 @@ string team::getDateOpened() const
 
 /**
  * @brief Member function that reads in the data of a Team from a file.
- * @param inFile
- * An input file name specified in main.
+ * @param inFile An input file name specified in main.
  */
 void team::read(fstream &inFile)
 {
