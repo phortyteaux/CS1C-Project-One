@@ -1,3 +1,8 @@
+/**
+  * @file extra_functions.h
+  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
+  */
+
 #ifndef EXTRA_FUNCTIONS_H
 #define EXTRA_FUNCTIONS_H
 #include "team.h"
@@ -30,8 +35,8 @@ void addTeam(QAbstractItemModel *model, const QString &teamName,
 
 /**
  * @brief createTeamModel Creates the model where all NFL information will reside.
- * @param parent The
- * @param teamVec The vector containing all
+ * @param parent The model that is being used for the output of the teams.
+ * @param teamVec The vector containing all team information in strings.
  * @return Pointer to a QAbstractItemModel.
  */
 QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec);

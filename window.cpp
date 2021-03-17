@@ -1,22 +1,23 @@
 /**
  * @file window.cpp
- * @brief window.cpp
- *
+ * @brief window.cpp Defines the behavior of the behavior of a Window object.
+ * Window serves as the central widget in the application, and handles the GUI.
  * @authors
  */
 
 #include <QtWidgets>
 #include <QVector>
 #include <QtAlgorithms>
+#include <QtCore>
 #include <QInputDialog>
+#include <fstream>
 #include <iostream>
 #include <string>
+
 #include "window.h"
-#include "login.h"
-// #include "inputTeam.h"
 
 /**
- * @brief NUM_COLUMNS
+ * @brief NUM_COLUMNS Constant representing the number of columns in the QTreeView.
  */
 const int NUM_COLUMNS = 9;
 
@@ -45,7 +46,7 @@ static void setTextColor(QWidget *w, const QColor &c)
 }
 
 /**
- * @brief Window::Window
+ * @brief Window::Window Constructor for the Window class.
  */
 Window::Window()
 {
@@ -89,22 +90,23 @@ Window::Window()
     filterColumnComboBox->addItem(tr("Stadium Roof Type"));
     filterColumnComboBox->addItem(tr("Date Opened"));
 
-    filterColumnLabel = new QLabel(tr("Filter &column:"));
+    filterColumnLabel = new QLabel(tr("Filter &Column:"));
     filterColumnLabel->setBuddy(filterColumnComboBox);
 
-    stadiumCapacityLabel = new QLabel(tr("Total capacity:"));
+    stadiumCapacityLabel = new QLabel(tr("Total Capacity:"));
     calculatedCapacityLabel = new QLabel(tr(""));
+    calculatedCapacityLabel->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter);
 
     calculateTotalButton = new QPushButton();
-    calculateTotalButton->setText("Calculate total");
+    calculateTotalButton->setText("Calculate Total");
 
-    connect(filterPatternLineEdit, &QLineEdit::textChanged,
+     connect(filterPatternLineEdit, &QLineEdit::textChanged,
             this, &Window::filterRegularExpressionChanged);
-    connect(filterSyntaxComboBox, &QComboBox::currentIndexChanged,
+     connect(filterSyntaxComboBox, &QComboBox::currentIndexChanged,
             this, &Window::filterRegularExpressionChanged);
     connect(filterColumnComboBox, &QComboBox::currentIndexChanged,
             this, &Window::filterColumnChanged);
-    connect(filterCaseSensitivityCheckBox, &QAbstractButton::toggled,
+     connect(filterCaseSensitivityCheckBox, &QAbstractButton::toggled,
             this, &Window::filterRegularExpressionChanged);
     connect(sortCaseSensitivityCheckBox, &QAbstractButton::toggled,
             this, &Window::sortChanged);
@@ -162,11 +164,13 @@ Window::Window()
     createActions();
     createMenus();
 
+    /** @brief Sets the passwordValid value initially to false, assuming the user has not logged in yet. */
     passwordValid = false;
 }
 
 /**
- * @brief Window::createActions
+ * @brief Window::createActions Maps the connects between the menu items and the actions required to open the
+ * corresponding windows.
  */
 void Window::createActions()
 {
@@ -188,7 +192,7 @@ void Window::createActions()
 }
 
 /**
- * @brief Window::createMenus
+ * @brief Window::createMenus Creates the menu bar at the top of the Windo object.
  */
 void Window::createMenus()
 {
@@ -203,31 +207,55 @@ void Window::createMenus()
 }
 
 /**
- * @brief Window::contactUs
+ * @brief Window::contactUs This function displays a message window with the developer contact info.
  */
 void Window::contactUs()
 {
-    //
+   QMessageBox::StandardButton reply = QMessageBox::question(this, "Developer Emails",
+       "phortyteaux@gmail.com\nj.wannamaker19@gmail.com\nImTechy48@gmail.com\njoy4haddad@gmail.com\n\n"
+       "Would you like to copy the emails to your clipboard?", QMessageBox::Yes | QMessageBox::No);
+
+   if (reply == QMessageBox::Yes)
+    {
+        QApplication::clipboard();
+    }
 }
 
 /**
- * @brief Window::helpMe
+ * @brief Window::helpMe This function displays all the relevant information to navigate the GUI.
  */
 void Window::helpMe()
 {
-    //
+    QMessageBox::about(this, "Help Menu", "• In the drop down menu next to 'filter column,' choose\n "
+        "an NFL category in order to sort by.\n • By choosing one of the categories, you can filter search\n"
+        " for a specific team using the category you chose.\n • Pusing the 'Calculate Total' button will "
+        "display the\n total seating capacity accross all the stadiums. ");
 }
 
 /**
- * @brief Window::adminLogin
+ * @brief Window::adminLogin provides a window for the Admin to enter their password.
+ * Validates or invalidates the Admin attempt to login, when logged in they can add a new team to the dataset.
  */
 void Window::adminLogin()
 {
-    QInputDialog *login = new Login(this);
+    QInputDialog *login = new QInputDialog;
+
+    /**
+     * @brief setWindowTitle Sets the title of the window to Admin Login.
+     */
+    login->setWindowTitle(tr("Admin Login"));
+
+    /** @brief Sets the text for the labels to Enter Password. */
+    login->setLabelText(tr("Password"));
+
+    /**
+     * @brief setTextEchoMode Sets the input line to Password mode so the text is hidden when typed.
+     */
+    login->setTextEchoMode(QLineEdit::Password);
 
     QString password = "Password";
 
-    if(passwordValid)
+    if (passwordValid)
     {
         QMessageBox *alreadyLoggedIn = new QMessageBox;
         alreadyLoggedIn->setWindowTitle(tr("Error"));
@@ -237,56 +265,110 @@ void Window::adminLogin()
     else
     {
         login->show();
-        if(login->exec() == QDialog::Accepted)
+
+        if (login->exec() == QDialog::Accepted)
         {
-            if(login->textValue() == password)
+            if (login->textValue() == password)
             {
-                std::cout << "Success!" << std::endl;
                 QMessageBox *validInput = new QMessageBox;
-                validInput->setWindowTitle(tr("Success"));
-                validInput->setText(tr("Welcome administrator"));
+                validInput->setWindowTitle(tr("Welcome"));
+                validInput->setText(tr("Successful login.\nYou may now Add Team."));
                 validInput->show();
                 this->passwordValid = true;
             }
             else
             {
-                std::cout << "Try again!" << std::endl;
+                /**
+                 * @brief invalidInput
+                 * Pointer to a QMessageBox object indicating that the login failed.
+                 */
                 QMessageBox *invalidInput = new QMessageBox;
-                invalidInput->setWindowTitle(tr("Failure"));
-                invalidInput->setText(tr("Password is invalid, please try again"));
+
+                invalidInput->setWindowTitle(tr("Error"));
+                invalidInput->setText(tr("Failed login.\nPassword is invalid, please try again"));
                 invalidInput->show();
                 this->passwordValid = false;
-                this->adminLogin();
             }
         }
     }
-    std::cout << "passwordValid: " << passwordValid << std::endl;
 }
 
 /**
- * @brief Window::addTeamRunTime
+ * @brief Window::addTeamRunTime Allows the user to enter a file path where data for the new team is located.
+ * Opens the file specified by the user, checks if it has the necessary data, and updates the list with the
+ * new team.
  */
 void Window::addTeamRunTime()
 {
-    // check bool if able to add team or not
-    if (passwordValid)
-    {
-        // QInputDialog *inputTeam = new InputTeam(this);
+    /**
+      * @brief inputTeam The QInputDialog window that will provide the line between the user input and data
+      * management in the program.
+      */
+     QInputDialog *inputTeam = new QInputDialog;
 
-        // inputTeam->show();
-    }
+     /**
+      * @brief inFile An instance of an fstream object that can read in from the file specified by the user.
+      */
+     std::fstream inFile;
+
+     /** @brief setlabelText sets the text for the label. */
+     inputTeam->setLabelText(tr("Specify a file path"));
+
+     inputTeam->setWindowTitle(tr("Add a New Team"));
+
+     QMessageBox *fileError = new QMessageBox;
+     fileError->setWindowTitle(tr("Error"));
+     fileError->setText(tr("Failed to open the file.\nPlease try again."));
+
+     QMessageBox *fileSuccess = new QMessageBox;
+     fileSuccess->setWindowTitle(tr("Success"));
+     fileSuccess->setText(tr("The file was found and opened successfully."));
+     ;
+
+     if (passwordValid)
+     {
+        inputTeam->show();
+        inFile.open(inputTeam->textValue().QString::toStdString());
+
+        if (inputTeam->exec() == QDialog::Accepted)
+        {
+            if (!inFile.fail() || inFile.is_open())
+            {
+                fileSuccess->show();
+
+                // read in from the file
+
+                // pass to addTeam
+            }
+            else
+            {
+                fileError->show();
+            }
+        }
+
+     }
+     else
+     {
+
+         QMessageBox *invalidAttempt = new QMessageBox;
+         invalidAttempt->setWindowTitle(tr("Error"));
+         invalidAttempt->setText("Must login first before adding a team!");
+         invalidAttempt->show();
+     }
 }
 
 /**
- * @brief Window::setSourceModel
- * @param model
+ * @brief Window::setSourceModel Passes the "source" data to the model and view that are used for the Widget.
+ * @param model A pointer to a QAbstractItemModel.
  */
 void Window::setSourceModel(QAbstractItemModel *model) /**/
 {
     proxyModel->setSourceModel(model);
     sourceView->setModel(model);
+
     for(int i = 0; i < NUM_COLUMNS; i++)
     {
+        /** @brief Makes it so that the column sizes are determined by the longest member in that column. */
         proxyView->resizeColumnToContents(i);
     }
 }
@@ -339,17 +421,17 @@ void Window::filterColumnChanged()
  */
 void Window::sortChanged()
 {
-    proxyModel->setSortCaseSensitivity(
-            sortCaseSensitivityCheckBox->isChecked() ? Qt::CaseSensitive
-                                                     : Qt::CaseInsensitive);
+    proxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
 }
 
 /**
- * @brief Window::calculateCapacity
+ * @brief Window::calculateCapacity Calculates the sum of all stadiums' seating capacity.
+ * Accounts for all repeats in the list by adding stadium names to a string vector and checking the current
+ * stadium against previously summed stadiums.
  */
 void Window::calculateCapacity()
 {
-    const int STADIUM_NAMES = 1;       /** @brief STADIUM_NAMES Column number with stadium names. */
+    const int STADIUM_NAMES = 1;    /** @brief STADIUM_NAMES Column number with stadium names. */
     const int SEATING_CAPACITY = 2; /** @brief SEATING_CAPACITY Column number with seating capacity. */
 
     /**
@@ -361,6 +443,7 @@ void Window::calculateCapacity()
     /** @brief result Holds the total calculated seats. */
     int result = 0;
 
+    /** @brief Loop iterates through */
     for(int row = 0; row < proxyModel->rowCount(); row++)
     {
         if(std::count(countedStadiums.begin(), countedStadiums.end(),

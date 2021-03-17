@@ -2,24 +2,27 @@
   * @file createTeamModel.cpp
   * @brief createTeamModel.cpp
   * Contains definition of the createTeamModel function.
-  * @authors
+  * @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
   */
 
 #include "extra_functions.h"
 
 /**
  * @brief createTeamModel
- * @param parent
- * @param teamVec
- * @return
+ * @param parent A pointer to the base class of a widget.
+ * @param teamVec A vector containing all information regarding the NFL, stored in strings.
+ * @return A QAbstractItemModel, containing all the information regarding the NFL, stored in QStrings.
  */
 QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
 {
-    /** @brief model
-     *  Defines the data passed to the QTreeView, that sorts and displays the information.
+    /** @brief model Creates a new QStandardItemModel object.
+     *  Defines the data passed to the QTreeView in Window, that sorts and displays the information.
      */
     QStandardItemModel *model = new QStandardItemModel(0, 9, parent);
 
+    /**
+      * @brief Creating an object for every header and labelling them appropriately.
+      */
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Team Name"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Stadium Name"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Seating Capacity"));
@@ -30,6 +33,10 @@ QAbstractItemModel *createTeamModel(QObject *parent, vector<team> &teamVec)
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Stadium Roof Type"));
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("Date Opened"));
 
+    /**
+      * @brief For loop iterates through the vector converting every string field to a QString.
+      * After being converted to QStrings, the data from a team is passed to the addteam function.
+      */
     for(unsigned int i = 0; i < teamVec.size(); i++)
     {
         QString qTeamName = QString::fromStdString(teamVec[i].getTeamName());

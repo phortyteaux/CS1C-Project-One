@@ -1,9 +1,8 @@
 /**
- * @file window.h
- *
+ *  @file window.h
  *  @class Window
- *  Defines the content of the main window of the interactive pamphlet app.
- *  @authors
+ *  @brief Defines the content of the main window of the interactive pamphlet app.
+ *  @authors Max Kwatcher, Johnny Wannamaker, Aileen Phoung, and Joy Haddad
  */
 
 #ifndef WINDOW_H
@@ -13,6 +12,7 @@
 #include <QtCore>
 
 QT_BEGIN_NAMESPACE
+class QtCore;
 class QAbstractItemModel;
 class QCheckBox;
 class QComboBox;
@@ -30,6 +30,12 @@ class QSpacerItem;
 class QMessageBox;
 QT_END_NAMESPACE
 
+/**
+ * @brief The Window class is the central widget of the application.
+ * It supports the functionality a viewing a spread of NFL teams, being able to sort by their column
+ * headers (Team Name, Stadium Name, Location, Conference, Division, etc.), calculating the maximum
+ * capacity of seats across all stadiums, and support for an administator login to add a team.
+ */
 class Window : public QWidget
 {
     Q_OBJECT
@@ -45,17 +51,28 @@ public:
      * @brief setSourceModel Sets the source model to be displayed in the widget.
      * @param model A pointer to the QAbstractItem containing the source model.
      */
-    void setSourceModel(QAbstractItemModel *model); /**/
-    //void setProxyView(QAbstractItemModel *model);
+    void setSourceModel(QAbstractItemModel *model);
 
 private slots:
+    /** @brief Indicates the text filter has been changed. */
     void filterRegularExpressionChanged();
+
+    /** @brief Indicates the column to filter the view by when text is entered has been changed. */
     void filterColumnChanged();
+
+    /** @brief Indicates that the sort of the view has been changed by column header. */
     void sortChanged();
+
+    /** @brief Indicator to calculate the total capacity across all stadiums in the view. */
     void calculateCapacity();
 
+    /** @brief Indicates the Contact Us menu option has been activated. */
     void contactUs();
+
+    /** @brief Indicates that the Help menu option has been activated. */
     void helpMe();
+
+    /** @brief Indicator for the . */
     void adminLogin();
     void addTeamRunTime();
 
@@ -151,7 +168,7 @@ private:
     QPushButton *calculateTotalButton;
 
     /**
-     * @brief The Syntax enum.
+     * @brief The Syntax enum to indicate  .
      */
     enum Syntax {
         RegularExpression,
@@ -171,32 +188,62 @@ private:
      */
     QComboBox *filterColumnComboBox;
 
-    QInputDialog *login;
-
+    /**
+     * @brief helpMeAct
+     * Pointer to a QAction object.
+     */
     QAction *helpMeAct;
 
+    /**
+     * @brief contactAct
+     * Pointer to a QAction object.
+     */
     QAction *contactAct;
 
+    /**
+     * @brief loginAct
+     * Pointer to a QAction object.
+     */
     QAction *loginAct;
 
+    /**
+     * @brief addTeamAct
+     * Pointer to a QAction object.
+     */
     QAction *addTeamAct;
 
+    /**
+     * @brief menuBar
+     * Pointer to a QMenuBar object.
+     */
     QMenuBar *menuBar;
 
+    /**
+     * @brief adminMenu
+     * Pointer to a QMenu object.
+     */
     QMenu *adminMenu;
 
+    /**
+     * @brief helpMenu
+     * Pointer to a QMenu object.
+     */
     QMenu *helpMenu;
 
-    QMessageBox *validInput;
-
-    QMessageBox *invalidInput;
-
-    QMessageBox *alreadyLoggedIn;
-
+    /**
+     * @brief createActions
+     */
     void createActions();
 
+    /**
+     * @brief createMenus
+     */
     void createMenus();
 
+    /**
+     * @brief passwordValid
+     * A bool indicating if the entered password by the user is correct or not.
+     */
     bool passwordValid;
 };
 
