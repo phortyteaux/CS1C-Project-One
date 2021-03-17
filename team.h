@@ -76,7 +76,6 @@ public:
     /** @brief Set the Date Opened data member. */
     void setDateOpened(string dateOpened);
 
-
     /**
      * @brief Get the Team Name data member.
      * @return Team name.

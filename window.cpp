@@ -10,16 +10,22 @@
 #include <QtAlgorithms>
 #include <QtCore>
 #include <QInputDialog>
+#include <QFileDialog>
+#include <QString>
 #include <fstream>
 #include <iostream>
 #include <string>
 
+#include "team.h"
+#include "extraFunctions.h"
 #include "window.h"
 
 /**
  * @brief NUM_COLUMNS Constant representing the number of columns in the QTreeView.
  */
 const int NUM_COLUMNS = 9;
+
+vector<team> Window::mainInfoVec;
 
 /**
  * @brief textColor Defines the coloring of the application based on the OS of the user.
@@ -213,13 +219,7 @@ void Window::createMenus()
 void Window::contactUs()
 {
    QMessageBox::StandardButton reply = QMessageBox::question(this, "Developer Emails",
-       "phortyteaux@gmail.com\nj.wannamaker19@gmail.com\nImTechy48@gmail.com\njoy4haddad@gmail.com\n\n"
-       "Would you like to copy the emails to your clipboard?", QMessageBox::Yes | QMessageBox::No);
-
-   if (reply == QMessageBox::Yes)
-    {
-        QApplication::clipboard();
-    }
+       "phortyteaux@gmail.com\nj.wannamaker19@gmail.com\nImTechy48@gmail.com\njoy4haddad@gmail.com\n\n");
 }
 
 /**
@@ -305,17 +305,17 @@ void Window::addTeamRunTime()
       * @brief inputTeam The QInputDialog window that will provide the line between the user input and data
       * management in the program.
       */
-     QInputDialog *inputTeam = new QInputDialog;
+     // QInputDialog *inputTeam = new QInputDialog;
+
+     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File to Add Team(s)"),
+                                                     "C:/Users/johnn/OneDrive/Desktop",
+                                                     tr("Spreadsheet (*.csv)"));
+
 
      /**
       * @brief inFile An instance of an fstream object that can read in from the file specified by the user.
       */
      std::fstream inFile;
-
-     /** @brief setlabelText sets the text for the label. */
-     inputTeam->setLabelText(tr("Specify a file path"));
-
-     inputTeam->setWindowTitle(tr("Add a New Team"));
 
      QMessageBox *fileError = new QMessageBox;
      fileError->setWindowTitle(tr("Error"));
@@ -324,28 +324,32 @@ void Window::addTeamRunTime()
      QMessageBox *fileSuccess = new QMessageBox;
      fileSuccess->setWindowTitle(tr("Success"));
      fileSuccess->setText(tr("The file was found and opened successfully."));
-     ;
 
      if (passwordValid)
      {
-        inputTeam->show();
-        inFile.open(inputTeam->textValue().QString::toStdString());
+        inFile.open(fileName.QString::toStdString());
 
-        if (inputTeam->exec() == QDialog::Accepted)
+        if (inFile.is_open()) //inFile.is_open()
         {
-            if (!inFile.fail() || inFile.is_open())
-            {
-                fileSuccess->show();
+            fileSuccess->show();
 
-                // read in from the file
-
-                // pass to addTeam
-            }
-            else
+            team tempElement;
+            while(!inFile.eof())
             {
-                fileError->show();
+                tempElement.read(inFile);
+                Window::mainInfoVec.push_back(tempElement);
+
+                std::cout << tempElement.getTeamName() << std::endl;
             }
+            inFile.close();
+
+            this->setSourceModel(createTeamModel(this, Window::mainInfoVec));
         }
+        else
+        {
+            fileError->show();
+        }
+
 
      }
      else

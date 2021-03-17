@@ -10,6 +10,7 @@
 
 #include <QWidget>
 #include <QtCore>
+#include "team.h"
 
 QT_BEGIN_NAMESPACE
 class QtCore;
@@ -52,6 +53,12 @@ public:
      * @param model A pointer to the QAbstractItem containing the source model.
      */
     void setSourceModel(QAbstractItemModel *model);
+
+    /**
+     * @brief mainInfoVec A vector.
+     * A vector holding all of the team objects in the input file.
+     */
+    static vector<team> mainInfoVec;
 
 private slots:
     /** @brief Indicates the text filter has been changed. */

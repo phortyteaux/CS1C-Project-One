@@ -6,6 +6,7 @@
 
 #ifndef EXTRA_FUNCTIONS_H
 #define EXTRA_FUNCTIONS_H
+
 #include "team.h"
 #include "window.h"
 #include <QApplication>

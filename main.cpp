@@ -8,6 +8,7 @@
 #include "team.h"
 #include "extraFunctions.h"
 
+
 /**
  * @brief The main function, handles the execution of the application as well as input from file.
  * @param argc Number of arguments passed as command line parameters.
@@ -24,12 +25,6 @@ int main(int argc, char *argv[])
     Window window;
 
     /**
-     * @brief mainInfoVec
-     * A vector holding all of the team objects in the input file.
-     */
-    vector<team> mainInfoVec;
-
-    /**
      * @brief inFile
      * An fstream object representing the input data.
      */
@@ -38,7 +33,7 @@ int main(int argc, char *argv[])
     /**
       * @brief Opens the input file containing all information regarding NFL.
       */
-    inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-QtFiles/nfl.csv");
+    inFile.open("C:/Users/johnn/OneDrive/Desktop/CS1C-Project-One-main/nfl.csv");
 
     team tempElement;
 
@@ -49,7 +44,7 @@ int main(int argc, char *argv[])
     while(!inFile.eof())
     {
         tempElement.read(inFile);
-        mainInfoVec.push_back(tempElement);
+        Window::mainInfoVec.push_back(tempElement);
     }
 
     /**
@@ -61,7 +56,9 @@ int main(int argc, char *argv[])
       * @brief setSourceModel Sets the source model of the main window to the created by createTeamModel.
       * A model is created for the NFL Information and passed to the main window from the mainInfoVec.
       */
-    window.setSourceModel(createTeamModel(&window, mainInfoVec));
+    window.setSourceModel(createTeamModel(&window, Window::mainInfoVec));
+
+
     window.show();
     return app.exec();
 }

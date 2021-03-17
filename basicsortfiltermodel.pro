@@ -2,7 +2,7 @@ QT += widgets
 requires(qtConfig(combobox))
 
 HEADERS     = window.h \
-    extra_functions.h \
+    extraFunctions.h \
     team.h
 SOURCES     = main.cpp \
               addTeam.cpp \
@@ -15,7 +15,8 @@ target.path = $$[QT_INSTALL_EXAMPLES]/widgets/itemviews/basicsortfiltermodel
 INSTALLS += target
 
 DISTFILES += \
-    nfl.csv
+    nfl.csv \
+    nfl_test.csv
 
 FORMS +=
 
